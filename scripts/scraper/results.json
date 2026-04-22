@@ -1,0 +1,24 @@
+{
+  "openai-gpt4o": {
+    "inputPrice": 2.5,
+    "outputPrice": 10,
+    "lastUpdated": "2026-04-22"
+  },
+  "anthropic-claude4": {
+    "inputPrice": 3,
+    "outputPrice": 15,
+    "lastUpdated": "2026-04-22"
+  },
+  "supabase-db": {
+    "unitPrice": 0.125,
+    "lastUpdated": "2026-04-22"
+  },
+  "upstash-redis": {
+    "unitPrice": 0.000002,
+    "lastUpdated": "2026-04-22"
+  },
+  "pinecone-db": {
+    "unitPrice": 0.000002,
+    "lastUpdated": "2026-04-22"
+  }
+}

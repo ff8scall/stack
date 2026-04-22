@@ -1,0 +1,89 @@
+{
+  "Index": {
+    "title": "LegoStack - 심미적 AI 도구 저장소",
+    "description": "1인 개발자를 위한 가장 아름답고 강력한 AI 브릭들을 만나보세요.",
+    "bill": "예상 월간 청구액",
+    "mau": "시뮬레이션 MAU"
+  },
+  "Categories": {
+    "All": "전체",
+    "Language": "언어 모델",
+    "Vision": "비전 & UI",
+    "Voice": "음성 & 오디오",
+    "Builder": "개발 도구",
+    "Infra": "인프라"
+  },
+  "Bricks": {
+    "openai-gpt4o": {
+      "name": "GPT-4o",
+      "feature": "강력한 멀티모달 추론 및 업계 표준 안정성",
+      "alt": "Claude 4의 대안"
+    },
+    "anthropic-claude4": {
+      "name": "Claude 4",
+      "feature": "압도적인 코딩 논리 및 인간적인 문체 구현",
+      "alt": "GPT-4o의 대안"
+    },
+    "gemini-3-pro": {
+      "name": "Gemini 3 Pro",
+      "feature": "100만 토큰 이상의 방대한 컨텍스트 처리",
+      "alt": "GPT-4o의 대안"
+    },
+    "groq-llama3": {
+      "name": "Groq",
+      "feature": "LPU 기반의 압도적인 실시간 추론 속도",
+      "alt": "OpenAI API의 대안"
+    },
+    "v0-dev": {
+      "name": "v0.dev",
+      "feature": "프롬프트만으로 React/Tailwind UI 즉시 생성",
+      "alt": "수동 코딩의 대안"
+    },
+    "elevenlabs-v3": {
+      "name": "ElevenLabs",
+      "feature": "가장 자연스러운 목소리 복제 및 감정 표현",
+      "alt": "AWS Polly의 대안"
+    },
+    "cursor-ide": {
+      "name": "Cursor",
+      "feature": "코드베이스 전체를 이해하는 차세대 AI 에디터",
+      "alt": "VS Code의 대안"
+    },
+    "midjourney-v7": {
+      "name": "Midjourney v7",
+      "feature": "예술적 영감을 주는 독보적인 이미지 퀄리티",
+      "alt": "DALL-E 3의 대안"
+    },
+    "supabase-db": {
+      "name": "Supabase",
+      "feature": "가장 강력한 오픈소스 Firebase 대안",
+      "alt": "Firebase의 대안"
+    },
+    "perplexity-pro": {
+      "name": "Perplexity",
+      "feature": "실시간 웹 검색이 결합된 가장 완벽한 답변 엔진",
+      "alt": "Google 검색의 대안"
+    },
+    "mistral-large": {
+      "name": "Mistral Large",
+      "feature": "유럽을 대표하는 강력하고 효율적인 오픈 웨이트 모델",
+      "alt": "GPT-4o의 대안"
+    },
+    "pinecone-db": {
+      "name": "Pinecone",
+      "feature": "가장 안정적이고 관리하기 쉬운 벡터 데이터베이스",
+      "alt": "Weaviate의 대안"
+    },
+    "upstash-redis": {
+      "name": "Upstash",
+      "feature": "서버리스 환경을 위한 Redis/Kafka 서비스",
+      "alt": "Redis Cloud의 대안"
+    },
+    "runway-gen3": {
+      "name": "Runway",
+      "feature": "텍스트에서 비디오로, 차세대 영상 제작 솔루션",
+      "alt": "Sora의 대안"
+    }
+
+  }
+}

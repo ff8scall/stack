@@ -1,0 +1,89 @@
+{
+  "Index": {
+    "title": "LegoStack - Aesthetic AI Resource Hub",
+    "description": "Discover the most beautiful and powerful AI bricks for solo developers.",
+    "bill": "Est. Monthly Bill",
+    "mau": "Simulation MAU"
+  },
+  "Categories": {
+    "All": "All",
+    "Language": "Language",
+    "Vision": "Vision & UI",
+    "Voice": "Voice & Audio",
+    "Builder": "Builder",
+    "Infra": "Infra"
+  },
+  "Bricks": {
+    "openai-gpt4o": {
+      "name": "GPT-4o",
+      "feature": "Strong multimodal reasoning & industry stability",
+      "alt": "Alternative to Claude 4"
+    },
+    "anthropic-claude4": {
+      "name": "Claude 4",
+      "feature": "Superior coding logic & human-like writing",
+      "alt": "Alternative to GPT-4o"
+    },
+    "gemini-3-pro": {
+      "name": "Gemini 3 Pro",
+      "feature": "Massive 1M+ context window processing",
+      "alt": "Alternative to GPT-4o"
+    },
+    "groq-llama3": {
+      "name": "Groq",
+      "feature": "Ultra-fast LPU-based real-time inference",
+      "alt": "Alternative to OpenAI API"
+    },
+    "v0-dev": {
+      "name": "v0.dev",
+      "feature": "Prompt to React/Tailwind UI generation",
+      "alt": "Alternative to manual coding"
+    },
+    "elevenlabs-v3": {
+      "name": "ElevenLabs",
+      "feature": "Most human-like voice cloning & emotions",
+      "alt": "Alternative to AWS Polly"
+    },
+    "cursor-ide": {
+      "name": "Cursor",
+      "feature": "Codebase-aware next-gen AI editor",
+      "alt": "Alternative to VS Code"
+    },
+    "midjourney-v7": {
+      "name": "Midjourney v7",
+      "feature": "Unrivaled artistic image quality & style",
+      "alt": "Alternative to DALL-E 3"
+    },
+    "supabase-db": {
+      "name": "Supabase",
+      "feature": "Most powerful open-source Firebase alternative",
+      "alt": "Alternative to Firebase"
+    },
+    "perplexity-pro": {
+      "name": "Perplexity",
+      "feature": "Most complete answer engine with real-time web search",
+      "alt": "Alternative to Google Search"
+    },
+    "mistral-large": {
+      "name": "Mistral Large",
+      "feature": "Powerful and efficient open-weight models from Europe",
+      "alt": "Alternative to GPT-4o"
+    },
+    "pinecone-db": {
+      "name": "Pinecone",
+      "feature": "The most reliable and easy-to-manage vector database",
+      "alt": "Alternative to Weaviate"
+    },
+    "upstash-redis": {
+      "name": "Upstash",
+      "feature": "Serverless Redis/Kafka for modern cloud apps",
+      "alt": "Alternative to Redis Cloud"
+    },
+    "runway-gen3": {
+      "name": "Runway",
+      "feature": "Next-gen video creation solution from text to video",
+      "alt": "Alternative to Sora"
+    }
+
+  }
+}
