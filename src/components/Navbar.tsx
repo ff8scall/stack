@@ -31,7 +31,7 @@ export default function Navbar() {
           letterSpacing: '-0.07em',
           color: '#fff',
           whiteSpace: 'nowrap',
-          marginRight: '0.5rem'
+          marginRight: '0.5rem',
         }}>
           LEGO<span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: '400' }}>stack</span>
         </div>

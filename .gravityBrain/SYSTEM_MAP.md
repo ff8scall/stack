@@ -3,56 +3,55 @@
 ## 🏗️ 전체 아키텍처
 ```mermaid
 graph TD
-    User((사용자)) --> NextJS[Next.js App Router]
-    NextJS --> UI[Aesthetic UI Layer]
-    NextJS --> Data[JSON Data Layer]
+    User((사용자)) --> NextJS[Next.js 16 App Router]
+    NextJS --> I18N[Next-Intl Layer]
+    I18N --> UI[Aesthetic UI Layer]
+    NextJS --> Data[JSON/TS Data Layer]
     
     subgraph "Backend Pipeline"
-        Scraper[Pricing Scrapers: OpenAI, Anthropic, Supabase, Upstash, Pinecone] --> Data
-        RSS[RSS/Changelog Monitor] --> Data
-        Admin[Update Admin] --> Data
+        Scraper[Pricing Scrapers: Playwright] --> Data
+        Sync[Data Sync Script] --> Data
     end
 
     UI --> CSS[Vanilla CSS Variables]
     UI --> Motion[Framer Motion]
+    UI --> Store[Zustand State]
     Data --> SSG[Static Site Generation]
 ```
 
 ## 🛠️ 기술 스택 상세
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **i18n**: Next-Intl (Prefix-based routing: `/ko`, `/en`)
+- **Framework**: Next.js 16.2 (App Router)
+- **Language**: TypeScript 5.x
+- **i18n**: Next-Intl (Prefix-based: `/ko`, `/en`)
 - **Styling**: Vanilla CSS (Global Variables + Module CSS)
-- **Animation**: Framer Motion (Micro-interactions)
-- **Data Source**: `/data/*.json` (정적 파일)
-- **SEO**: Metadata API + JSON-LD + Sitemap.xml
-- **Rendering**: ISR (Incremental Static Regeneration - `revalidate: 3600`)
-- **Deployment**: Vercel
+- **Animation**: Framer Motion 12.x
+- **State Management**: Zustand 5.x
+- **Data Layer**: `/src/data/*.ts` (bricks.ts, presets.ts)
+- **Automation**: Playwright (Price Scraping)
+- **Deployment**: Vercel (Expected)
 
-## 📂 폴더 구조 설계 (Draft)
+## 📂 폴더 구조
 ```text
 /stack
-├── .gravityBrain/          # 시스템 기억 저장소 (MEMORY, SYSTEM_MAP 등)
-├── .github/workflows/      # CI/CD 및 가격 자동 업데이트 워크플로우
+├── .gravityBrain/          # 에이전트 장기 기억 저장소
+├── .github/workflows/      # 자동화 워크플로우 (가격 스크래핑 등)
 ├── /scripts
-│   ├── /scraper            # AI 및 인프라 가격 수집 스크래퍼 (Playwright)
-│   │   ├── results.json    # 수집된 원시 가격 데이터
-│   │   └── update_data.js  # bricks.ts에 데이터를 반영하는 엔진
-│   └── /seo                # 검색 엔진 인덱싱 및 SEO 유틸리티
+│   └── /scraper            # 가격 수집 엔진 (Playwright 기반)
 ├── /src
-│   ├── /app                # Next.js App Router (i18n 라우팅 포함)
-│   ├── /components         # UI Components (Calculator, BrickGrid 등)
-│   ├── /data               # 정적 데이터 (bricks.ts, presets.ts)
-│   ├── /lib                # 계산기 엔진 및 유틸리티 함수
-│   ├── /store              # Zustand 상태 관리 (사용자 스택 정보)
-│   └── /styles             # Global CSS Variables 및 디자인 시스템
-├── /public                 # 정적 에셋 (아이콘, 파비콘)
-└── next.config.ts          # Next.js 설정 및 환경 변수
+│   ├── /app                # Next.js App Router (Routing, Layouts)
+│   ├── /components         # UI 컴포넌트 (Atomic Design 컨셉)
+│   ├── /data               # 핵심 데이터 (서비스 목록, 가격 정책, 프리셋)
+│   ├── /i18n               # i18n 설정 및 요청 처리
+│   ├── /lib                # 비즈니스 로직 (비용 계산기 엔진, 유틸리티)
+│   ├── /messages           # 다국어 번역 리소스 (ko.json, en.json)
+│   └── /store              # Zustand 스토어 (사용자 선택 스택 상태)
+├── /public                 # 정적 자산 (이미지, 로고)
+└── package.json            # 의존성 및 프로젝트 설정
 ```
 
-## 🔗 모듈 간 관계
-- **Scraper ➔ Data**: Playwright가 수집한 가격 정보가 `results.json`을 거쳐 `bricks.ts` 상의 가격 상수를 실시간으로 업데이트.
-- **Data ➔ UI**: `bricks.ts`의 정적 데이터를 Next.js ISR을 통해 SEO 최적화된 HTML로 사전 렌더링.
-- **Store ➔ Calculator**: Zustand 스토어에 저장된 `MAU`, `Usage` 상태가 `CalculatorBar`에 실시간 반영되어 합계 비용 계산.
-- **i18n ➔ App**: `next-intl` 미들웨어가 `/ko`, `/en` 경로에 따라 적절한 번역 메시지(`ko.json`, `en.json`) 주입.
-- **Security ➔ External**: 외부 서비스 링크는 Proxy Redirect 시스템을 통해 트래킹 및 보안 정책(`noopener`) 적용.
+## 🔗 핵심 모듈 및 데이터 흐름
+1. **데이터 수집 (Scripts)**: `scripts/scraper`가 Playwright를 통해 OpenAI, Anthropic 등의 최신 가격을 수집하여 `src/data`의 상수를 업데이트합니다.
+2. **다국어 처리 (i18n)**: `src/messages`의 번역본이 `next-intl`을 통해 UI에 주입되며, `/ko`, `/en` 등의 경로로 관리됩니다.
+3. **비용 계산 로직 (Lib/Store)**: 사용자가 UI에서 선택한 스택 정보가 `Zustand` 스토어에 저장되고, `lib`의 계산 엔진이 실시간으로 합산 비용을 산출합니다.
+4. **프리젠테이션 (UI)**: `Framer Motion`과 `Vanilla CSS`를 활용하여 고급스러운 인터랙션과 디자인을 제공합니다.
+5. **검색 최적화 (SEO)**: Next.js의 Metadata API와 정적 생성을 통해 개발자 도구 키워드 노출을 극대화합니다.

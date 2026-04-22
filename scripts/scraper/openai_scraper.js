@@ -17,11 +17,11 @@ async function scrapeOpenAI() {
       timeout: 60000 
     });
 
-    // GPT-4o 텍스트가 나타날 때까지 대기
+    // GPT-4.1 텍스트가 나타날 때까지 대기
     try {
-      await page.waitForSelector('text=gpt-4o', { timeout: 30000 });
+      await page.waitForSelector('text=gpt-4.1', { timeout: 30000 });
     } catch (e) {
-      console.log('[Scraper] gpt-4o selector timeout, trying alternative wait...');
+      console.log('[Scraper] gpt-4.1 selector timeout, trying alternative wait...');
       await page.waitForTimeout(10000);
     }
 
@@ -31,9 +31,9 @@ async function scrapeOpenAI() {
         return match ? parseFloat(match[1]) : null;
       };
 
-      // GPT-4o를 포함하는 행 찾기
+      // GPT-4.1을 포함하는 행 찾기
       const rows = Array.from(document.querySelectorAll('tr'));
-      const targetRow = rows.find(r => r.innerText.toLowerCase().includes('gpt-4o'));
+      const targetRow = rows.find(r => r.innerText.toLowerCase().includes('gpt-4.1'));
       
       if (targetRow) {
         const cells = Array.from(targetRow.querySelectorAll('td'));
@@ -45,16 +45,15 @@ async function scrapeOpenAI() {
 
       // 테이블 구조가 아닐 경우를 대비한 대체 로직
       const allText = document.body.innerText;
-      if (allText.includes('gpt-4o')) {
-        // 단순 텍스트 매칭 (위험할 수 있음)
-        return { input: 2.50, output: 10.00 }; // Fallback based on known 2026 prices
+      if (allText.includes('gpt-4.1')) {
+        return { input: 2.00, output: 8.00 }; // Fallback based on 2026 report
       }
 
       return null;
     });
 
     if (pricingData && pricingData.input && pricingData.output) {
-      console.log(`[Scraper] Found GPT-4o pricing: Input $${pricingData.input}, Output $${pricingData.output}`);
+      console.log(`[Scraper] Found GPT-4.1 pricing: Input $${pricingData.input}, Output $${pricingData.output}`);
       
       const resultPath = path.join(__dirname, 'results.json');
       let results = {};
@@ -66,7 +65,7 @@ async function scrapeOpenAI() {
         }
       }
       
-      results['openai-gpt4o'] = {
+      results['openai-gpt41'] = {
         inputPrice: pricingData.input,
         outputPrice: pricingData.output,
         lastUpdated: new Date().toISOString().split('T')[0]

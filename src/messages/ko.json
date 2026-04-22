@@ -14,76 +14,115 @@
     "Infra": "인프라"
   },
   "Bricks": {
-    "openai-gpt4o": {
-      "name": "GPT-4o",
-      "feature": "강력한 멀티모달 추론 및 업계 표준 안정성",
-      "alt": "Claude 4의 대안"
+    "openai-gpt41": {
+      "name": "GPT-4.1",
+      "feature": "캐싱 효율 75% 개선 및 완벽한 구조화 출력",
+      "alt": "Claude 4.6의 대안"
     },
-    "anthropic-claude4": {
-      "name": "Claude 4",
-      "feature": "압도적인 코딩 논리 및 인간적인 문체 구현",
-      "alt": "GPT-4o의 대안"
+    "anthropic-claude46": {
+      "name": "Claude 4.6",
+      "feature": "TTL 제어 가능 캐싱과 압도적 코딩 추론",
+      "alt": "GPT-4.1의 대안"
+    },
+    "deepseek-v3": {
+      "name": "DeepSeek V3.2",
+      "feature": "글로벌 가격 파괴 및 OpenAI API 완벽 호환",
+      "alt": "GPT-4.1-mini의 대안"
+    },
+    "groq-llama33": {
+      "name": "Groq LPU",
+      "feature": "300+ TPS의 초저지연 실시간 인퍼런스",
+      "alt": "OpenAI API의 대안"
     },
     "gemini-3-pro": {
       "name": "Gemini 3 Pro",
-      "feature": "100만 토큰 이상의 방대한 컨텍스트 처리",
-      "alt": "GPT-4o의 대안"
+      "feature": "방대한 무료 티어와 구글 생태계 통합",
+      "alt": "GPT-4.1의 대안"
     },
-    "groq-llama3": {
-      "name": "Groq",
-      "feature": "LPU 기반의 압도적인 실시간 추론 속도",
-      "alt": "OpenAI API의 대안"
+    "fal-ai": {
+      "name": "fal.ai",
+      "feature": "밀리초 단위의 실시간 이미지 생성 API",
+      "alt": "Replicate의 대안"
     },
-    "v0-dev": {
-      "name": "v0.dev",
-      "feature": "프롬프트만으로 React/Tailwind UI 즉시 생성",
-      "alt": "수동 코딩의 대안"
+    "replicate": {
+      "name": "Replicate",
+      "feature": "방대한 오픈소스 모델의 서버리스 GPU 배포",
+      "alt": "fal.ai의 대안"
+    },
+    "runway-gen4": {
+      "name": "Runway Gen-4",
+      "feature": "엔터프라이즈급 영상 품질과 정밀 모션 제어",
+      "alt": "Sora의 대안"
+    },
+    "leonardo-ai": {
+      "name": "Leonardo.ai",
+      "feature": "팀 단위 커스텀 AI 모델 훈련 및 스타일 참조",
+      "alt": "Midjourney의 대안"
+    },
+    "cartesia-sonic": {
+      "name": "Cartesia",
+      "feature": "90ms의 초저지연 TTFA와 인간적 감정 표현",
+      "alt": "ElevenLabs의 대안"
+    },
+    "deepgram-nova": {
+      "name": "Deepgram",
+      "feature": "종량제 기반의 고성능 실시간 오디오 파이프라인",
+      "alt": "ElevenLabs의 대안"
     },
     "elevenlabs-v3": {
       "name": "ElevenLabs",
-      "feature": "가장 자연스러운 목소리 복제 및 감정 표현",
-      "alt": "AWS Polly의 대안"
+      "feature": "70개국 이상의 다국어 음성 합성 독보적 1위",
+      "alt": "Deepgram의 대안"
     },
-    "cursor-ide": {
-      "name": "Cursor",
-      "feature": "코드베이스 전체를 이해하는 차세대 AI 에디터",
-      "alt": "VS Code의 대안"
+    "hume-evi": {
+      "name": "Hume AI",
+      "feature": "사용자의 감정에 동조하는 공감형 음성 인터페이스",
+      "alt": "실시간 대화 에이전트"
     },
-    "midjourney-v7": {
-      "name": "Midjourney v7",
-      "feature": "예술적 영감을 주는 독보적인 이미지 퀄리티",
-      "alt": "DALL-E 3의 대안"
+    "pydantic-ai": {
+      "name": "PydanticAI",
+      "feature": "타입 안정성 기반의 완벽한 구조화 에이전트 구축",
+      "alt": "LangChain의 대안"
+    },
+    "vercel-ai-sdk": {
+      "name": "Vercel AI SDK",
+      "feature": "Next.js 최적화 및 Generative UI 통합 지원",
+      "alt": "LangChain의 대안"
+    },
+    "langgraph-cloud": {
+      "name": "LangGraph",
+      "feature": "상태 머신 기반의 명시적 워크플로우 제어",
+      "alt": "단순 체이닝의 대안"
+    },
+    "composio": {
+      "name": "Composio",
+      "feature": "200개 이상의 SaaS 도구 연동 및 인증 자동화",
+      "alt": "Zapier의 대안"
+    },
+    "pinecone-serverless": {
+      "name": "Pinecone",
+      "feature": "완전 관리형 서버리스 벡터 DB의 업계 표준",
+      "alt": "Weaviate의 대안"
+    },
+    "upstash-vector": {
+      "name": "Upstash Vector",
+      "feature": "진정한 요청당 과금 방식의 엣지 최적화 DB",
+      "alt": "Pinecone의 대안"
+    },
+    "helicone": {
+      "name": "Helicone",
+      "feature": "스마트 캐싱을 통한 비용 절감 및 관측성 확보",
+      "alt": "LangSmith의 대안"
+    },
+    "braintrust": {
+      "name": "Braintrust",
+      "feature": "AI 품질 평가 및 회귀 테스트 자동화 플랫폼",
+      "alt": "수동 평가의 대안"
     },
     "supabase-db": {
       "name": "Supabase",
-      "feature": "가장 강력한 오픈소스 Firebase 대안",
+      "feature": "PostgreSQL 기반의 가장 완성도 높은 BaaS",
       "alt": "Firebase의 대안"
-    },
-    "perplexity-pro": {
-      "name": "Perplexity",
-      "feature": "실시간 웹 검색이 결합된 가장 완벽한 답변 엔진",
-      "alt": "Google 검색의 대안"
-    },
-    "mistral-large": {
-      "name": "Mistral Large",
-      "feature": "유럽을 대표하는 강력하고 효율적인 오픈 웨이트 모델",
-      "alt": "GPT-4o의 대안"
-    },
-    "pinecone-db": {
-      "name": "Pinecone",
-      "feature": "가장 안정적이고 관리하기 쉬운 벡터 데이터베이스",
-      "alt": "Weaviate의 대안"
-    },
-    "upstash-redis": {
-      "name": "Upstash",
-      "feature": "서버리스 환경을 위한 Redis/Kafka 서비스",
-      "alt": "Redis Cloud의 대안"
-    },
-    "runway-gen3": {
-      "name": "Runway",
-      "feature": "텍스트에서 비디오로, 차세대 영상 제작 솔루션",
-      "alt": "Sora의 대안"
     }
-
   }
 }

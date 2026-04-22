@@ -8,7 +8,13 @@ async function runAll() {
     'anthropic_scraper.js',
     'supabase_scraper.js',
     'upstash_scraper.js',
-    'pinecone_scraper.js'
+    'pinecone_scraper.js',
+    'deepseek_scraper.js',
+    'groq_scraper.js',
+    'elevenlabs_scraper.js',
+    'deepgram_scraper.js',
+    'helicone_scraper.js',
+    'runway_scraper.js'
   ];
 
   console.log('🚀 Starting All Scrapers...');

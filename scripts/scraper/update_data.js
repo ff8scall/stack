@@ -49,6 +49,18 @@ function updateData() {
         itemUpdated = true;
       }
     }
+    // 3. Subscription-based pricing (monthlyPrice)
+    else if (data.monthlyPrice !== undefined) {
+      const regex = new RegExp(
+        `(id:\\s*"${id}"[\\s\\S]+?pricing:\\s*{[\\s\\S]+?monthlyPrice:)\\s*[\\d.]+(,[\\s\\S]+?lastUpdated:)\\s*"[\\d-]+"`,
+        'g'
+      );
+      if (regex.test(content)) {
+        content = content.replace(regex, `$1 ${data.monthlyPrice}$2 "${data.lastUpdated}"`);
+        updatedCount++;
+        itemUpdated = true;
+      }
+    }
 
     if (itemUpdated) {
       console.log(`[Updater] ✅ Successfully mapped and updated: ${id}`);
