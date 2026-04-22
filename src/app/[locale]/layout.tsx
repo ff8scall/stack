@@ -25,6 +25,9 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
         'ko-KR': '/ko',
         'en-US': '/en',
       },
+      types: {
+        'application/rss+xml': '/rss.xml',
+      },
     },
     openGraph: {
       title: t('title'),
