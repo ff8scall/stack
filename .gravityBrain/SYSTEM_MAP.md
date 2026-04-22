@@ -54,4 +54,5 @@ graph TD
 2. **다국어 처리 (i18n)**: `src/messages`의 번역본이 `next-intl`을 통해 UI에 주입되며, `/ko`, `/en` 등의 경로로 관리됩니다.
 3. **비용 계산 로직 (Lib/Store)**: 사용자가 UI에서 선택한 스택 정보가 `Zustand` 스토어에 저장되고, `lib`의 계산 엔진이 실시간으로 합산 비용을 산출합니다.
 4. **프리젠테이션 (UI)**: `Framer Motion`과 `Vanilla CSS`를 활용하여 고급스러운 인터랙션과 디자인을 제공합니다.
-5. **검색 최적화 (SEO)**: Next.js의 Metadata API와 정적 생성을 통해 개발자 도구 키워드 노출을 극대화합니다.
+5. **실시간 공유 시스템 (Sync/OG)**: `src/lib/serialize.ts`를 통해 스토어 상태를 URL 쿼리 스트링으로 실시간 동기화하며, `api/og`를 통해 동적 OG 이미지를 생성하여 바이럴 효과를 극대화합니다.
+6. **검색 최적화 (SEO)**: Next.js의 Metadata API와 정적 생성을 통해 개발자 도구 키워드 노출을 극대화합니다.

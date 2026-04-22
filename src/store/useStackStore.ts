@@ -18,6 +18,7 @@ interface StackState {
   setCurrency: (currency: 'USD' | 'KRW') => void;
   applyPreset: (brickIds: string[]) => void;
   resetStack: () => void;
+  setFullState: (data: Partial<StackState>) => void;
 }
 
 export const useStackStore = create<StackState>()(
@@ -51,6 +52,7 @@ export const useStackStore = create<StackState>()(
       setCurrency: (currency) => set({ currency }),
       applyPreset: (brickIds) => set({ selectedBrickIds: brickIds }),
       resetStack: () => set({ selectedBrickIds: [] }),
+      setFullState: (data) => set((state) => ({ ...state, ...data })),
     }),
     {
       name: 'legostack-storage', // 로컬 스토리지에 자동 저장 (새로고침 시 유지)

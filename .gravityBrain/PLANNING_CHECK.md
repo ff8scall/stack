@@ -1,18 +1,21 @@
-# PLANNING CHECK (우선순위 결정 및 작업 관리)
+# PLANNING CHECK (기획 체크리스트)
 
-## 🎯 Phase 1: Aesthetic MVP (런칭 우선순위)
-- [P0] **AI 갤러리 그리드**: 33종 도구의 심미적 카드 렌더링.
-- [P0] **다국어 지원**: `/ko`, `/en` 경로별 번역 및 SEO 적용.
-- [P1] **Stack Builder MVP**: 선택한 도구들의 MAU 기반 비용 시뮬레이터 (장바구니 형태).
-- [P1] **카테고리 필터링**: 5대 브릭 분류별 즉시 필터링 로직.
+## 📋 통합 기획 상태
+- [x] **시장 조사 (/research)**: 경쟁사(TAAFT, FutureTools) 분석 및 차별점 도출 완료.
+- [x] **BM 설계 (/brainstorm)**: 'FinOps 시뮬레이터' 기반의 제휴 수익 모델 확립.
+- [x] **서비스 성격 (/monetize)**: 유료 모델 폐기 및 100% 무료 유틸리티 허브로 피벗 완료.
+- [x] **사용자 여정 (/user-journey)**: 1인 개발자의 도구 탐색 -> 비용 시뮬레이션 -> 스택 확정 및 결제 흐름 설계.
+- [x] **리스크 검증 (/pre-verify)**: 데이터 정확성 리스크 및 업데이트 자동화로 대응.
+- [x] **범위 확정 (/mvp-scope)**: Phase 3(Social & Share) 개발 범위 확정.
 
-## 🚀 Phase 2: Growth & Automation (고도화)
-- [P2] **가격 자동 업데이트**: Scraper를 통한 실시간 가격 추적 연동.
-- [P2] **커뮤니티 지표**: 사용자 Upvote/Downvote 및 인기 순위 자동 정렬.
-- [P3] **Share Card**: 내 스택을 예쁜 이미지로 내보내는 기능.
+## 🛠️ 향후 구현 과제
+- [x] **Hybrid Short Slug System**: Supabase DB 연동 및 슬러그 발급/조회 API 구현 완료.
+- [x] **Visual Viral Engine**: html-to-image 연동 및 동적 OG 태그 시스템 구축 완료.
+- [x] **Contextual UI Slider**: MAU/Usage 수치를 현실 예시로 치환해주는 레이블 컴포넌트 개발 완료.
+- [x] **Stack Recipe System**: 전문가 추천 스택 템플릿(Preset) 강화 및 '공유 이미지' 캡처 연동 완료.
+- [ ] **Analytics Dashboard**: 슬러그별 유입 경로 및 제휴 클릭 전환 트래킹 (Phase 4 예정).
 
 ---
-## 🏁 현재 진행 상태
-- 환경 구축 완료 (Next.js, i18n)
-- 데이터 수집 완료 (33종)
-- **다음 작업**: Stack Builder를 위한 데이터 표준화 로직 설계
+## 📅 업데이트 기록
+- **최종 업데이트**: 2026-04-22
+- **현재 단계**: Phase 3 종료 및 Phase 4 준비

@@ -3,7 +3,8 @@
     "title": "LegoStack - Aesthetic AI Resource Hub",
     "description": "Discover the most beautiful and powerful AI bricks for solo developers.",
     "bill": "Est. Monthly Bill",
-    "mau": "Simulation MAU"
+    "mau": "Simulation MAU",
+    "view_details": "View Details"
   },
   "Categories": {
     "All": "All",
@@ -124,5 +125,25 @@
       "feature": "Most complete BaaS based on PostgreSQL",
       "alt": "Alternative to Firebase"
     }
+  },
+  "Context": {
+    "mau_low": "Monthly visitors of a cozy local boutique",
+    "mau_mid": "Daily foot traffic at Times Square",
+    "mau_high": "2x the capacity of Wembley Stadium",
+    "mau_vhigh": "Total population of a city like Miami",
+    "usage_low": "Casual chat interaction (1 page of text)",
+    "usage_mid": "Comprehensive research report (5 pages of text)",
+    "usage_high": "Professional technical whitepaper (20 pages of text)"
+  },
+  "Share": {
+    "button": "Share Stack",
+    "success": "Share link copied!",
+    "error": "Failed to create share link.",
+    "copy": "Copy",
+    "modal_title": "Share AI Stack",
+    "modal_description": "Share your simulation results with colleagues and discuss the architecture.",
+    "copy_link": "Copy Link",
+    "close": "Close",
+    "copied": "Copied!"
   }
 }

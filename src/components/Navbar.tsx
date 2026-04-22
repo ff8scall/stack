@@ -1,11 +1,15 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useStackStore } from '@/store/useStackStore';
 import FilterBar from './FilterBar';
 
 export default function Navbar() {
   const t = useTranslations('Index');
+  const locale = useLocale();
+
+  const activeStyle = { fontSize: '0.8rem', fontWeight: '800', color: '#fff', textDecoration: 'none' };
+  const inactiveStyle = { fontSize: '0.8rem', fontWeight: '800', color: 'rgba(255,255,255,0.3)', textDecoration: 'none' };
 
   return (
     <nav className="glass" style={{
@@ -50,8 +54,8 @@ export default function Navbar() {
           backgroundColor: 'rgba(255,255,255,0.03)',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
-          <a href="/ko" style={{ fontSize: '0.8rem', fontWeight: '800', color: '#fff', textDecoration: 'none' }}>KO</a>
-          <a href="/en" style={{ fontSize: '0.8rem', fontWeight: '800', color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>EN</a>
+          <a href="/ko" style={locale === 'ko' ? activeStyle : inactiveStyle}>KO</a>
+          <a href="/en" style={locale === 'en' ? activeStyle : inactiveStyle}>EN</a>
         </div>
       </div>
     </nav>

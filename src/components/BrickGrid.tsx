@@ -3,17 +3,20 @@
 import { useStackStore } from '@/store/useStackStore';
 import { bricks } from '@/data/bricks';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Plus, Check, MessageSquare, Zap, Mic, Image, Layout, Box, Database, Search, Workflow, Cpu, Code, AlertCircle, Clock } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { Star, Plus, Check, MessageSquare, Zap, Mic, Image, Layout, Box, Database, Search, Workflow, Cpu, Code, AlertCircle, Clock, Globe, Shield, Activity, BarChart, Info } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
+import Link from 'next/link';
 
 const IconMap: Record<string, any> = {
-  MessageSquare, Zap, Mic, Image, Layout, Box, Database, Search, Workflow, Cpu, Code
+  MessageSquare, Zap, Mic, Image, Layout, Box, Database, Search, Workflow, Cpu, Code, Globe, Shield, Activity, BarChart
 };
 
 export default function BrickGrid() {
   const { selectedBrickIds, toggleBrick, activeCategory } = useStackStore();
   const tBricks = useTranslations('Bricks');
   const tCats = useTranslations('Categories');
+  const tIndex = useTranslations('Index');
+  const locale = useLocale();
 
   const filteredBricks = activeCategory === 'All' 
     ? bricks 
@@ -92,9 +95,16 @@ export default function BrickGrid() {
                     </div>
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: '700', letterSpacing: '-0.02em' }}>
-                      {tBricks(`${brick.id}.name`)}
-                    </h3>
+                    <Link 
+                      href={`/${locale}/brick/${brick.id}`}
+                      onClick={(e) => e.stopPropagation()}
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fff', textDecoration: 'none' }}
+                    >
+                      <h3 style={{ fontSize: '1.1rem', fontWeight: '700', letterSpacing: '-0.02em' }}>
+                        {tBricks(`${brick.id}.name`)}
+                      </h3>
+                      <Info size={14} style={{ opacity: 0.3 }} />
+                    </Link>
                     <div style={{ fontSize: '0.65rem', color: 'var(--foreground-secondary)', textTransform: 'uppercase', fontWeight: '600' }}>
                       {tCats(brick.category)}
                     </div>
@@ -134,73 +144,69 @@ export default function BrickGrid() {
                 <span>Last Updated: {brick.lastUpdated}</span>
               </div>
 
-              {/* Bottom Info: Price + Action */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem' }}>
-                <div style={{ 
-                  fontSize: '0.85rem', 
-                  fontWeight: '600', 
+              {/* Bottom Info: Price + Action Group */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                <div className="mono" style={{ 
+                  fontSize: '0.9rem', 
+                  fontWeight: '700', 
                   color: '#fff',
-                  padding: '0.4rem 0.8rem',
-                  borderRadius: '8px',
-                  backgroundColor: 'rgba(255,255,255,0.05)'
+                  opacity: 0.9
                 }}>
                   {brick.pricing.type === 'token' ? `$${brick.pricing.inputPrice}/1M` : 
                    brick.pricing.type === 'subscription' ? `$${brick.pricing.monthlyPrice}/mo` : 
                    brick.pricing.type === 'infra' ? `$${brick.pricing.unitPrice}/${brick.pricing.unitName}` : 'Free Tier'}
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <a 
-                    href={`/api/redirect?id=${brick.id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    style={{ fontSize: '0.75rem', color: 'var(--foreground-secondary)', textDecoration: 'underline' }}
-                  >
-                    Visit Site
-                  </a>
-                  <a 
-                    href={`mailto:report@lego-sia.com?subject=Price Error: ${tBricks(`${brick.id}.name`)}`}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Link 
+                    href={`/${locale}/brick/${brick.id}`}
                     onClick={(e) => e.stopPropagation()}
                     style={{ 
+                      fontSize: '0.7rem', 
+                      color: 'rgba(255,255,255,0.6)', 
+                      padding: '0.4rem 0.75rem',
+                      borderRadius: '8px',
+                      backgroundColor: 'rgba(255,255,255,0.05)',
+                      fontWeight: '600',
+                      transition: 'all 0.2s',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.2rem',
-                      fontSize: '0.7rem', 
-                      color: 'rgba(255,255,255,0.2)', 
-                      transition: 'color 0.2s' 
+                      gap: '4px'
                     }}
-                    onMouseOver={(e) => e.currentTarget.style.color = '#f87171'}
-                    onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.2)'}
-                    title="Report pricing error"
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                      e.currentTarget.style.color = '#fff';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                      e.currentTarget.style.color = 'rgba(255,255,255,0.6)';
+                    }}
                   >
-                    <AlertCircle size={12} />
-                    Report
-                  </a>
-                </div>
-
-                
-                <div style={{ 
-                  padding: '0.4rem 1rem',
-                  borderRadius: '10px',
-                  backgroundColor: isSelected ? '#fff' : 'rgba(255,255,255,0.05)',
-                  color: isSelected ? '#000' : '#fff',
-                  fontSize: '0.75rem',
-                  fontWeight: '700',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  transition: 'all 0.2s ease'
-                }}>
-                  {isSelected ? (
-                    <>
-                      <Check size={14} /> Selected
-                    </>
-                  ) : (
-                    <>
-                      <Plus size={14} /> Add to Stack
-                    </>
-                  )}
+                    {tIndex('view_details')}
+                  </Link>
+                  
+                  <div 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleBrick(brick.id);
+                    }}
+                    style={{ 
+                      padding: '0.4rem 0.9rem',
+                      borderRadius: '8px',
+                      backgroundColor: isSelected ? '#fff' : 'rgba(255,255,255,0.1)',
+                      color: isSelected ? '#000' : '#fff',
+                      fontSize: '0.7rem',
+                      fontWeight: '700',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      transition: 'all 0.2s ease',
+                      border: isSelected ? '1px solid #fff' : '1px solid rgba(255,255,255,0.1)'
+                    }}
+                  >
+                    {isSelected ? <Check size={12} /> : <Plus size={12} />}
+                    {isSelected ? 'Selected' : 'Add to Stack'}
+                  </div>
                 </div>
               </div>
             </motion.div>

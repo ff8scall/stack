@@ -3,7 +3,8 @@
     "title": "LegoStack - 심미적 AI 도구 저장소",
     "description": "1인 개발자를 위한 가장 아름답고 강력한 AI 브릭들을 만나보세요.",
     "bill": "예상 월간 청구액",
-    "mau": "시뮬레이션 MAU"
+    "mau": "시뮬레이션 MAU",
+    "view_details": "상세보기"
   },
   "Categories": {
     "All": "전체",
@@ -124,5 +125,25 @@
       "feature": "PostgreSQL 기반의 가장 완성도 높은 BaaS",
       "alt": "Firebase의 대안"
     }
+  },
+  "Context": {
+    "mau_low": "동네 인기 카페의 월간 방문객 규모",
+    "mau_mid": "강남역 하루 유동인구 규모",
+    "mau_high": "서울 월드컵 경기장 1.5배 만석",
+    "mau_vhigh": "작은 중소도시의 전체 인구 규모",
+    "usage_low": "간단한 챗봇 대화 (A4 1페이지 분량)",
+    "usage_mid": "심층적인 분석 리포트 (A4 5페이지 분량)",
+    "usage_high": "전문적인 기술 논문 작성 (A4 20페이지 분량)"
+  },
+  "Share": {
+    "button": "스택 공유하기",
+    "success": "공유 링크가 복사되었습니다!",
+    "error": "공유 링크 생성에 실패했습니다.",
+    "copy": "복사",
+    "modal_title": "AI 스택 공유",
+    "modal_description": "동료들에게 시뮬레이션 결과를 공유하고 아키텍처에 대해 논의해보세요.",
+    "copy_link": "링크 복사",
+    "close": "닫기",
+    "copied": "복사됨!"
   }
 }

@@ -67,3 +67,15 @@ sequenceDiagram
 - **예외 처리 전략**:
   - **Selector Timeout**: Playwright 스크립트에서 셀렉터를 찾지 못할 경우 로그만 남겨 전체 파이프라인 중단을 방지.
   - **Safety Guard**: 이전 가격 대비 변동폭이 2배 이상일 경우 수동 검토 플래그 생성 (Phase 3).
+
+## 8. Hybrid Share System (실시간 공유 시스템)
+- **설계 의도**: 사용자가 설정을 바꿀 때마다 URL을 최신화하여 '공유 버튼' 클릭 없이도 즉시 상태를 보존하고, SNS 공유 시에는 DB 기반의 짧은 슬러그와 시각적 카드(OG)를 제공함.
+- **무상태 동기화 (Stateless Sync)**:
+  1. `serializeStack`: `LZ-String`을 사용하여 `selectedBrickIds`, `mau`, `usage`, `currency`를 압축된 문자열로 변환.
+  2. `useUrlSync`: `Zustand` 상태가 변할 때마다 `window.history.replaceState`를 호출하여 URL의 `?s=` 쿼리 파라미터를 실시간(Debounced) 업데이트.
+  3. **하이드레이션**: 페이지 진입 시 URL에 `s` 파라미터가 있으면 DB 조회 없이 즉시 스토어를 복원하여 초기 로딩 속도 극대화.
+- **동적 바이럴 엔진 (Dynamic OG)**:
+  1. `api/og`: `next/og` (Edge Runtime)를 활용하여 `ImageResponse`로 실시간 비용 요약 카드 생성.
+  2. **데이터 결합**: 슬러그 정보를 기반으로 DB(Supabase)에서 스택 데이터를 가져와 카드 디자인에 렌더링.
+  3. **SNS 최적화**: 1200x630 해상도의 고품질 카드를 통해 트위터, 카카오톡 등에서 높은 클릭률 유도.
+

@@ -3,6 +3,7 @@ import {getMessages, getTranslations} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import "./globals.css";
+import UrlSync from '@/components/UrlSync';
 
 export const viewport = {
   themeColor: '#000000',
@@ -73,9 +74,10 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
+          <UrlSync />
           {children}
         </NextIntlClientProvider>
       </body>

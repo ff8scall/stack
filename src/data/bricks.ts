@@ -28,8 +28,7 @@ export const bricks: Brick[] = [
     lastUpdated: "2026-04-22",
     url: "https://openai.com",
     color: "#74aa9c",
-    iconName: "MessageSquare",
-    logoSlug: "openai"
+    iconName: "MessageSquare"
   },
   {
     id: "anthropic-claude46",
@@ -54,8 +53,7 @@ export const bricks: Brick[] = [
     lastUpdated: "2026-04-22",
     url: "https://deepseek.com",
     color: "#60a5fa",
-    iconName: "Zap",
-    logoSlug: "deepseek"
+    iconName: "Zap"
   },
   {
     id: "groq-llama33",
@@ -67,8 +65,7 @@ export const bricks: Brick[] = [
     lastUpdated: "2026-04-22",
     url: "https://groq.com",
     color: "#f55036",
-    iconName: "Zap",
-    logoSlug: "groq"
+    iconName: "Zap"
   },
   {
     id: "gemini-3-pro",
@@ -106,8 +103,9 @@ export const bricks: Brick[] = [
     killerFeature: "방대한 오픈소스 모델의 서버리스 GPU 배포",
     lastUpdated: "2026-04-22",
     url: "https://replicate.com",
-    color: "#000000",
-    iconName: "Box"
+    color: "#ffffff",
+    iconName: "Box",
+    logoSlug: "replicate"
   },
   {
     id: "runway-gen4",
@@ -119,8 +117,7 @@ export const bricks: Brick[] = [
     lastUpdated: "2026-04-22",
     url: "https://runwayml.com",
     color: "#ffffff",
-    iconName: "Image",
-    logoSlug: "runway"
+    iconName: "Image"
   },
   {
     id: "leonardo-ai",
@@ -145,7 +142,7 @@ export const bricks: Brick[] = [
     killerFeature: "90ms의 초저지연 TTFA와 인간적 감정 표현",
     lastUpdated: "2026-04-22",
     url: "https://cartesia.ai",
-    color: "#000000",
+    color: "#ffffff",
     iconName: "Mic"
   },
   {
@@ -158,7 +155,8 @@ export const bricks: Brick[] = [
     lastUpdated: "2026-04-22",
     url: "https://deepgram.com",
     color: "#13ef95",
-    iconName: "Activity"
+    iconName: "Activity",
+    logoSlug: "deepgram"
   },
   {
     id: "elevenlabs-v3",
@@ -182,7 +180,7 @@ export const bricks: Brick[] = [
     killerFeature: "사용자의 감정에 동조하는 공감형 음성 인터페이스",
     lastUpdated: "2026-04-22",
     url: "https://hume.ai",
-    color: "#000000",
+    color: "#ffffff",
     iconName: "Mic"
   },
 
@@ -197,7 +195,8 @@ export const bricks: Brick[] = [
     lastUpdated: "2026-04-22",
     url: "https://pydantic.ai",
     color: "#e92063",
-    iconName: "Code"
+    iconName: "Code",
+    logoSlug: "pydantic"
   },
   {
     id: "vercel-ai-sdk",
@@ -208,8 +207,9 @@ export const bricks: Brick[] = [
     killerFeature: "Next.js 최적화 및 Generative UI 통합 지원",
     lastUpdated: "2026-04-22",
     url: "https://sdk.vercel.ai",
-    color: "#000000",
-    iconName: "Workflow"
+    color: "#ffffff",
+    iconName: "Workflow",
+    logoSlug: "vercel"
   },
   {
     id: "langgraph-cloud",
@@ -232,7 +232,7 @@ export const bricks: Brick[] = [
     killerFeature: "200개 이상의 SaaS 도구 연동 및 인증 자동화",
     lastUpdated: "2026-04-22",
     url: "https://composio.dev",
-    color: "#000000",
+    color: "#ffffff",
     iconName: "Box"
   },
 
@@ -246,9 +246,8 @@ export const bricks: Brick[] = [
     killerFeature: "완전 관리형 서버리스 벡터 DB의 업계 표준",
     lastUpdated: "2026-04-22",
     url: "https://pinecone.io",
-    color: "#000000",
+    color: "#ffffff",
     iconName: "Database",
-    logoSlug: "pinecone",
     baseUsage: 1 // 유저당 1 WRU 가정
   },
   {
@@ -274,7 +273,7 @@ export const bricks: Brick[] = [
     killerFeature: "스마트 캐싱을 통한 비용 절감 및 관측성 확보",
     lastUpdated: "2026-04-22",
     url: "https://helicone.ai",
-    color: "#000000",
+    color: "#ffffff",
     iconName: "BarChart"
   },
   {
@@ -286,7 +285,7 @@ export const bricks: Brick[] = [
     killerFeature: "AI 품질 평가 및 회귀 테스트 자동화 플랫폼",
     lastUpdated: "2026-04-22",
     url: "https://braintrustdata.com",
-    color: "#000000",
+    color: "#ffffff",
     iconName: "Shield"
   },
   {

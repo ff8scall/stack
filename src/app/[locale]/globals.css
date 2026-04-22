@@ -93,3 +93,7 @@ button {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--border-hover);
 }
+
+.mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
