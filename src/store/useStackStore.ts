@@ -7,8 +7,10 @@ interface StackState {
   avgUsagePerUser: number;
   activeCategory: string;
   currency: 'USD' | 'KRW';
+  searchQuery: string;
   
   // Actions
+  setSearchQuery: (query: string) => void;
   setActiveCategory: (category: string) => void;
   addBrick: (id: string) => void;
   removeBrick: (id: string) => void;
@@ -29,8 +31,10 @@ export const useStackStore = create<StackState>()(
       avgUsagePerUser: 50,
       activeCategory: 'All',
       currency: 'USD',
+      searchQuery: '',
 
-      setActiveCategory: (category) => set({ activeCategory: category }),
+      setSearchQuery: (query) => set({ searchQuery: query }),
+      setActiveCategory: (category) => set({ activeCategory: category, searchQuery: '' }),
       addBrick: (id) => set((state) => ({
         selectedBrickIds: state.selectedBrickIds.includes(id) 
           ? state.selectedBrickIds 

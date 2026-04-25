@@ -3,8 +3,9 @@
 import { useStackStore } from '@/store/useStackStore';
 import { bricks } from '@/data/bricks';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Plus, Check, MessageSquare, Zap, Mic, Image, Layout, Box, Database, Search, Workflow, Cpu, Code, AlertCircle, Clock, Globe, Shield, Activity, BarChart, Info } from 'lucide-react';
+import { Star, Plus, Check, MessageSquare, Zap, Mic, Image, Layout, Box, Database, Search, Workflow, Cpu, Code, AlertCircle, Clock, Globe, Shield, Activity, BarChart, Info, TrendingUp } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
+import { calculateEfficiencyScore } from '@/lib/calculator';
 import Link from 'next/link';
 
 const IconMap: Record<string, any> = {
@@ -12,20 +13,31 @@ const IconMap: Record<string, any> = {
 };
 
 export default function BrickGrid() {
-  const { selectedBrickIds, toggleBrick, activeCategory } = useStackStore();
+  const { selectedBrickIds, toggleBrick, activeCategory, searchQuery } = useStackStore();
   const tBricks = useTranslations('Bricks');
   const tCats = useTranslations('Categories');
   const tIndex = useTranslations('Index');
   const locale = useLocale();
 
-  const filteredBricks = activeCategory === 'All' 
-    ? bricks 
-    : bricks.filter(b => b.category === activeCategory);
+  const filteredBricks = bricks.filter(brick => {
+    // 1. 카테고리 필터링
+    const categoryMatch = activeCategory === 'All' || brick.category === activeCategory;
+    
+    // 2. 검색어 필터링
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return categoryMatch;
+
+    const name = tBricks(`${brick.id}.name`).toLowerCase();
+    const feature = tBricks(`${brick.id}.feature`).toLowerCase();
+    const searchMatch = name.includes(q) || feature.includes(q) || brick.id.toLowerCase().includes(q);
+
+    return categoryMatch && searchMatch;
+  });
 
   return (
     <div style={{ 
       display: 'grid', 
-      gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', 
+      gridTemplateColumns: 'repeat(auto-fill, minmax(min(360px, 100%), 1fr))', 
       gap: '1.5rem',
       width: '100%',
       maxWidth: '1200px',
@@ -43,10 +55,16 @@ export default function BrickGrid() {
             <motion.div 
               layout
               key={brick.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                duration: 0.4, 
+                ease: [0.23, 1, 0.32, 1],
+                layout: { duration: 0.3 }
+              }}
               exit={{ opacity: 0, scale: 0.95 }}
-                whileHover={{ y: -4, borderColor: 'rgba(255,255,255,0.3)' }}
+                whileHover={{ y: -6, borderColor: 'rgba(255,255,255,0.4)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}
                 onClick={() => toggleBrick(brick.id)}
                 style={{
                   padding: '1.5rem',
@@ -110,10 +128,51 @@ export default function BrickGrid() {
                     </div>
                   </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', color: '#fbbf24' }}>
-                  <Star size={12} fill="#fbbf24" />
-                  <span style={{ fontSize: '0.8rem', fontWeight: '600', color: '#fff' }}>{brick.dxScore}</span>
-                  <span style={{ fontSize: '0.6rem', color: 'var(--foreground-secondary)', marginLeft: '4px' }}>DX</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  {/* Efficiency Score Badge */}
+                  {(() => {
+                    const effScore = calculateEfficiencyScore(brick.performance, brick.pricing);
+                    const isBestValue = effScore >= 90;
+                    return (
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        {isBestValue && (
+                          <div style={{ 
+                            padding: '2px 8px', 
+                            borderRadius: '4px', 
+                            background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', 
+                            color: '#000', 
+                            fontSize: '0.6rem', 
+                            fontWeight: '900',
+                            letterSpacing: '0.02em',
+                            boxShadow: '0 4px 12px rgba(251, 191, 36, 0.3)'
+                          }}>
+                            BEST VALUE
+                          </div>
+                        )}
+                        <div style={{ 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          gap: '0.2rem', 
+                          padding: '2px 8px', 
+                          borderRadius: '6px', 
+                          background: isBestValue ? 'rgba(251, 191, 36, 0.1)' : 'rgba(255,255,255,0.05)',
+                          border: `1px solid ${isBestValue ? 'rgba(251, 191, 36, 0.3)' : 'rgba(255,255,255,0.1)'}`,
+                          fontSize: '0.7rem',
+                          fontWeight: '800',
+                          color: isBestValue ? '#fbbf24' : 'rgba(255,255,255,0.4)',
+                          letterSpacing: '0.01em'
+                        }}>
+                          <TrendingUp size={10} />
+                          {effScore}
+                        </div>
+                      </div>
+                    );
+                  })()}
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', color: '#fbbf24' }}>
+                    <Star size={12} fill="#fbbf24" />
+                    <span style={{ fontSize: '0.8rem', fontWeight: '600', color: '#fff' }}>{brick.dxScore}</span>
+                  </div>
                 </div>
               </div>
               
@@ -126,7 +185,7 @@ export default function BrickGrid() {
                 borderLeft: '2px solid rgba(255,255,255,0.1)',
                 paddingLeft: '0.75rem'
               }}>
-                <span style={{ color: '#fff', fontWeight: '600', marginRight: '4px' }}>Killa:</span>
+                <span style={{ color: '#fff', fontWeight: '600', marginRight: '4px' }}>{tIndex('killer_label')}</span>
                 {tBricks(`${brick.id}.feature`)}
               </div>
 
@@ -141,7 +200,7 @@ export default function BrickGrid() {
                 gap: '0.25rem'
               }}>
                 <Clock size={10} />
-                <span>Last Updated: {brick.lastUpdated}</span>
+                <span>{tIndex('last_updated_label')}: {brick.lastUpdated}</span>
               </div>
 
               {/* Bottom Info: Price + Action Group */}
@@ -205,7 +264,7 @@ export default function BrickGrid() {
                     }}
                   >
                     {isSelected ? <Check size={12} /> : <Plus size={12} />}
-                    {isSelected ? 'Selected' : 'Add to Stack'}
+                    {isSelected ? tIndex('selected') : tIndex('add_to_stack')}
                   </div>
                 </div>
               </div>

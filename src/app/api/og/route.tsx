@@ -1,48 +1,109 @@
 import { ImageResponse } from 'next/og';
-import { deserializeStack } from '@/lib/serialize';
 import { bricks } from '@/data/bricks';
-import { calculateTotalCost, formatCurrency } from '@/lib/calculator';
+import { calculateEfficiencyScore } from '@/lib/calculator';
 
 export const runtime = 'edge';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const slug = searchParams.get('slug');
-    const s = searchParams.get('s'); // Direct data if available
+    const brickId = searchParams.get('brick');
+    const compare = searchParams.get('compare'); // vs 조합용
 
-    let stackData = s;
+    if (brickId) {
+      const brick = bricks.find((b) => b.id === brickId);
+      if (!brick) return new Response('Not Found', { status: 404 });
 
-    if (slug && !stackData) {
-      // Edge 환경에서 Supabase 호출 (주의: 환경변수 설정 필요)
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-      
-      if (supabaseUrl && supabaseKey) {
-        const response = await fetch(`${supabaseUrl}/rest/v1/shared_stacks?slug=eq.${slug}&select=stack_data`, {
-          headers: {
-            'apikey': supabaseKey,
-            'Authorization': `Bearer ${supabaseKey}`
-          }
-        });
-        const result = await response.json();
-        if (result && result[0]) {
-          stackData = result[0].stack_data;
+      const efficiency = calculateEfficiencyScore(brick.performance, brick.pricing);
+
+      return new ImageResponse(
+        (
+          <div
+            style={{
+              height: '100%',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#050505',
+              backgroundImage: 'radial-gradient(circle at 25px 25px, rgba(255,255,255,0.05) 2%, transparent 0%)',
+              backgroundSize: '50px 50px',
+              color: '#fff',
+              fontFamily: 'sans-serif',
+              padding: '40px',
+            }}
+          >
+            {/* Logo */}
+            <div style={{ position: 'absolute', top: 40, left: 40, display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ width: 24, height: 24, backgroundColor: '#fff', borderRadius: 4 }} />
+              <span style={{ fontSize: 24, fontWeight: 'bold', letterSpacing: '-0.05em' }}>LegoStack</span>
+            </div>
+
+            {/* Main Card */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '40px',
+                padding: '60px',
+                width: '90%',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '30px', marginBottom: '40px' }}>
+                <div
+                  style={{
+                    width: 100,
+                    height: 100,
+                    borderRadius: 24,
+                    backgroundColor: 'rgba(255,255,255,0.05)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: `2px solid ${brick.color}`,
+                  }}
+                >
+                  <div style={{ width: 50, height: 50, backgroundColor: brick.color, borderRadius: 10 }} />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <h1 style={{ fontSize: 64, fontWeight: 'bold', margin: 0, letterSpacing: '-0.05em' }}>{brick.name}</h1>
+                  <span style={{ fontSize: 24, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>{brick.category} Infrastructure</span>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <span style={{ fontSize: 20, color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>COST PERFORMANCE</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                    <span style={{ fontSize: 80, fontWeight: '900', color: '#10b981' }}>{efficiency}</span>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <span style={{ fontSize: 24, color: '#10b981', fontWeight: 'bold' }}>Excellent</span>
+                      <span style={{ fontSize: 18, color: 'rgba(255,255,255,0.3)' }}>Value Score</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
+                  <div style={{ padding: '8px 20px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 100, border: '1px solid rgba(255,255,255,0.1)', fontSize: 24, fontWeight: 'bold' }}>
+                    DX: {brick.dxScore}
+                  </div>
+                  <div style={{ fontSize: 20, color: 'rgba(255,255,255,0.4)' }}>Real-time Analysis by LegoStack</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+        {
+          width: 1200,
+          height: 630,
         }
-      }
+      );
     }
 
-    if (!stackData) {
-      return new Response('Stack not found', { status: 404 });
-    }
-
-    const state = deserializeStack(stackData);
-    if (!state) return new Response('Invalid data', { status: 400 });
-
-    const selectedBricks = bricks.filter(b => state.i.includes(b.id));
-    const totalCost = calculateTotalCost(selectedBricks, { mau: state.m, avgUsagePerUser: state.u });
-    const currency = state.c || 'USD';
-
+    // Default Fallback (LegoStack General)
     return new ImageResponse(
       (
         <div
@@ -50,62 +111,18 @@ export async function GET(request: Request) {
             height: '100%',
             width: '100%',
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#0a0a0a',
-            backgroundImage: 'radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%)',
-            padding: '40px',
-            color: 'white',
-            fontFamily: 'sans-serif',
+            backgroundColor: '#050505',
+            color: '#fff',
           }}
         >
-          <div style={{ display: 'flex', position: 'absolute', top: 40, left: 40, fontSize: 24, fontWeight: 900 }}>
-            LEGO<span style={{ opacity: 0.4 }}>stack</span>
-          </div>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
-            <div style={{ fontSize: 20, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: 2 }}>
-              Estimated Monthly Cost
-            </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-              <div style={{ fontSize: 80, fontWeight: 900 }}>
-                {formatCurrency(totalCost, currency)}
-              </div>
-              <div style={{ fontSize: 30, opacity: 0.5 }}>/mo</div>
-            </div>
-            
-            <div style={{ display: 'flex', gap: 20, marginTop: 10 }}>
-              <div style={{ padding: '8px 16px', borderRadius: 12, background: 'rgba(251, 191, 36, 0.1)', color: '#fbbf24', fontSize: 16, fontWeight: 600 }}>
-                MAU {state.m.toLocaleString()}
-              </div>
-              <div style={{ padding: '8px 16px', borderRadius: 12, background: 'rgba(96, 165, 250, 0.1)', color: '#60a5fa', fontSize: 16, fontWeight: 600 }}>
-                Usage {state.u} units
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginTop: 40, maxWidth: 800 }}>
-            {selectedBricks.slice(0, 8).map(brick => (
-              <div key={brick.id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: 'rgba(255,255,255,0.05)', borderRadius: 10, border: '1px solid rgba(255,255,255,0.1)' }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: brick.color }} />
-                <span style={{ fontSize: 14, fontWeight: 600 }}>{brick.name}</span>
-              </div>
-            ))}
-            {selectedBricks.length > 8 && <div style={{ fontSize: 14, opacity: 0.4 }}>+ {selectedBricks.length - 8} more</div>}
-          </div>
-
-          <div style={{ position: 'absolute', bottom: 40, fontSize: 14, color: 'rgba(255,255,255,0.2)' }}>
-            Build your AI Stack at stack.lego-sia.com
-          </div>
+          <h1 style={{ fontSize: 100 }}>LegoStack</h1>
         </div>
       ),
-      {
-        width: 1200,
-        height: 630,
-      }
+      { width: 1200, height: 630 }
     );
   } catch (e: any) {
-    return new Response(`Failed to generate image: ${e.message}`, { status: 500 });
+    return new Response(`Failed to generate image`, { status: 500 });
   }
 }

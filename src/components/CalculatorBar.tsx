@@ -50,10 +50,10 @@ export default function CalculatorBar() {
     try {
       const url = window.location.href;
       await navigator.clipboard.writeText(url);
-      alert('🔗 공유 링크가 복사되었습니다!\n이 링크를 전달하면 당신의 스택을 그대로 보여줄 수 있습니다.');
+      alert(tShare('share_alert'));
     } catch (e) {
       console.error('Share error:', e);
-      alert('링크 복사에 실패했습니다.');
+      alert(tShare('share_error'));
     } finally {
       setIsSharing(false);
     }
@@ -208,7 +208,7 @@ export default function CalculatorBar() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>User Scale</span>
+                <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>{t('user_scale')}</span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span className="mono" style={{ fontSize: '1.25rem', fontWeight: '700' }}>{mau.toLocaleString()}</span>
                   <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)' }}>MAU</span>
@@ -229,7 +229,7 @@ export default function CalculatorBar() {
           {/* Usage Section */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Daily Intensity</span>
+              <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>{t('daily_intensity')}</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <span className="mono" style={{ fontSize: '1.25rem', fontWeight: '700' }}>{avgUsagePerUser}</span>
                 <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)' }}>req/user</span>
@@ -319,14 +319,14 @@ export default function CalculatorBar() {
                 disabled={isSharing}
                 style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '8px', padding: '4px 8px', color: 'rgba(255,255,255,0.6)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', fontWeight: '600' }}
               >
-                <Share2 size={12} /> Share
+                <Share2 size={12} /> {t('share')}
               </button>
               <button 
                 onClick={() => setIsExpanded(!isExpanded)}
                 style={{ background: 'rgba(255,255,255,0.1)', borderRadius: '8px', padding: '4px 8px', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', fontWeight: '600' }}
               >
                 {isExpanded ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
-                {isExpanded ? 'Hide' : 'Breakdown'}
+                {isExpanded ? t('hide') : t('breakdown')}
               </button>
             </div>
           </div>
@@ -337,7 +337,7 @@ export default function CalculatorBar() {
         <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <h4 style={{ fontSize: '0.9rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Box size={16} /> Stack Cost Breakdown
+              <Box size={16} /> {t('stack_breakdown')}
             </h4>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               <button 
@@ -347,7 +347,7 @@ export default function CalculatorBar() {
                 style={{ background: 'rgba(255,255,255,0.05)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}
               >
                 <Image size={16} />
-                {isCapturing ? 'Capturing...' : 'Download Report'}
+                {isCapturing ? t('capturing') : t('download_report')}
               </button>
               <button className="share-btn" onClick={handleShare} disabled={isSharing}>
                 <Share2 size={16} />
@@ -372,8 +372,7 @@ export default function CalculatorBar() {
             })}
           </div>
           <div style={{ marginTop: '1.5rem', padding: '1rem', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.5)', lineHeight: '1.5' }}>
-            💡 Tip: {getUsageContext(avgUsagePerUser)} 수준의 사용량을 가정했습니다. <br/>
-            공유 버튼을 통해 이 구성을 동료에게 전달하고 비용 최적화를 논의해보세요.
+            {t('tip_prefix')} {getUsageContext(avgUsagePerUser)} {t('tip_message')}
           </div>
         </div>
       )}

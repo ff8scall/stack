@@ -1,48 +1,43 @@
 # MEMORY (LegoStack 프로젝트 기억 저장소)
 
 ## 🎯 현재 상황 (Context)
-- **프로젝트**: LegoStack
-- Phase 1 완료: 33종 AI 브릭 큐레이션 및 가로형 컴팩트 카드 UI 구현.
-- Spec Audit (v3) 완료: 서비스/기술/비즈니스 관점의 2차 검증 및 보완 완료 (2026-04-21).
-- 인프라 가격 모델, DX Score, Affiliate Redirect 시스템 구현 완료.
-- 모바일 최적화 (접이식 계산기) 완료.
-- **Phase 2 진행 중**: 인프라 카테고리 크롤러 확장(Supabase, Upstash, Pinecone) 및 데이터 검증 시스템 구축 완료 (2026-04-22).
-- **Phase 2 진행 중**: 계산기 가중치(BaseUsage) 로직 도입으로 비용 산출 정확도 개선.
-- **Phase 2 신규 데이터**: 2026 글로벌 AI 인프라 분석 데이터 수신 (20개 핵심 도구 메타데이터 확보).
-- **Phase 3 완료**: Hybrid Short Slug 및 실시간 URL Sync 시스템 구축 완료 (2026-04-22).
-- **Phase 3 완료**: Framer Motion 기반 프리미엄 공유 모달 및 동적 OG 이미지 엔진(/api/og) 구현 완료.
-- **i18n 완료**: ko/en 다국어 데이터 정합성 검토 및 현지화(Localization) 보완 완료.
-- **시스템 동기화**: `/system-map` 실행 및 Next.js 16 기반의 `proxy.ts` 마이그레이션(기존 middleware 대체) 완료 (2026-04-22).
+- **프로젝트**: LegoStack (AI FinOps Playground)
+- **유입 최적화 및 비교 조합 전수 확장 완료 (2026-04-26)**
+  - **비교 엔진 확장**: 카테고리 내 모든 유의미한 도구 쌍(Combination) 자동 생성 로직 적용.
+  - **콘텐츠 확장**: 3종의 고품질 기술 블로그 포스트 추가 및 RSS 피드 구축.
+  - **SEO 강화**: Sitemap 동적 확장 및 비교 페이지 하단 연관 비교 내부 링크 추가.
+- **벤치마크 기반 가성비(Efficiency) 엔진 고도화 완료 (2026-04-26)**
+  - **데이터 스키마 확장**: MMLU, HumanEval 등 공인 벤치마크 점수(`benchmarkScore`) 필드 추가.
+  - **가성비 로직 리팩토링**: 성능 지표와 비용(무료 티어 반영)을 결합한 새로운 `Efficiency Score` 산출.
+  - **UI/UX 시각화**: BrickGrid 'Best Value' 배지, 상세 페이지 벤치마크 카드, 비교 페이지 효율성 차트 추가.
+- **사이트 전체 정밀 감사 및 UI/UX 보강 완료 (2026-04-25)**
+  - **카테고리 페이지 고도화**: 플레이스홀더 제거, Navbar/Footer 추가, 상세 페이지 링크 연결.
+  - **비교 페이지 고도화**: 동적 Winner 배지 로직, 상세 분석 리포트 섹션 추가, Versus UI 개선.
+  - **i18n 완결**: 사이트 전반의 하드코딩 영문/국문 텍스트를 번역 키로 전환 완료.
+  - **데이터 정합성**: SharedStackView 및 가격 표시 로직의 런타임 오류 방어 완료.
 
-- **Phase 2 완료**: 2026 AI 에코시스템 20종 도구 데이터 통합 및 11종 핵심 도구 실시간 스크래퍼 구축 완료 (2026-04-22).
-- **자동화 완성**: GitHub Actions 기반의 일일 가격 업데이트 파이프라인 가동.
-- **SEO 최적화 완료**: Next.js 16 Metadata API 고도화, 시맨틱 H1 구조 개선 및 네이버/빙 소유권 확인 태그 추가 완료.
+## 🔜 다음 단계 (Future Roadmap)
+- **Phase 5 (데이터 심화 - 완료)**: 
+  - AI 모델별 '토큰 당 성능(Benchmark Score)' 지표를 통한 가성비 추천 알고리즘 고도화.
+  - (보류) 클라우드 인프라(AWS/Azure/GCP) 비용 모델 통합.
+- **Phase 6 (유입 최적화 - 완료)**: 
+  - 비교 조합 전수 생성을 통한 검색 엔진 노출 범위 극대화 및 RSS 피드 구축.
+- **Phase 7 (유저 경험 완성)**:
+  - 사용자가 직접 자신의 데이터를 업로드하여 비용을 시뮬레이션하는 '커스텀 분석' 기능.
+  - AI 추천 스택 프리셋(Presets) 기능 강화 및 커뮤니티 공유 기능 고도화.
 
-## 🔜 다음 단계 (Next Phase)
-- **Phase 4**: AWS/Azure/GCP 주요 AI 인프라 가격 자동 업데이트 추가 확장.
-- **Phase 4**: AI 모델 성능 대비 가격(Price-to-Performance) 분석 데이터 추가.
-- **Phase 4**: 사용자별 'Best Stack' 랭킹 시스템 및 커뮤니티 피드 구축.
+## 💡 주요 결정 사항
+- **전문성 집중**: 커뮤니티나 AI 챗봇 같은 부가 기능보다는, 1인 개발자와 기업이 실제로 참고할 수 있는 **'가장 정확하고 깊이 있는 AI 비용 데이터'**를 제공하는 것에 집중함.
+- **SEO 전략**: 비교 페이지와 상세 페이지의 콘텐츠 풍부도를 높여, 도구명 검색 시 LegoStack이 상위에 노출되도록 인프라를 구축함.
 
-## 💡 최근 결정 사항
-- **100% 무료화**: 유료 리포트 및 기업용 모델을 전면 폐기하고 '순수 무료 유틸리티'로 피벗 (2026-04-22).
+## 🚩 최근 작업 결과
+1. 유입 최적화 및 비교 조합 전수 확장 (Phase 6) ✅
+2. 벤치마크 기반 가성비 엔진 고도화 (Phase 5) ✅
+3. 사이트 정밀 감사 및 UI/UX 보강 ✅
 
-## 🚩 단기 목표 (Next Steps)
-1. AWS Lambda/S3 등 핵심 클라우드 가격 데이터셋 구축 (bricks.ts 확장)
-2. 'Best Stack' 랭킹 시스템을 위한 Supabase DB 분석 쿼리 설계
-3. 사용자 피드백 수집을 위한 간단한 설문/평가 UI 추가
-
-
-## 💡 최근 결정 사항
-- **Next.js 16 (App Router)**: 고성능 Turbopack 기반 프레임워크
-- **Zustand**: 선택된 AI 브릭 및 MAU 상태 관리 (Local Persist)
-- **Next-Intl**: 다국어 라우팅 및 메시지 관리 (/ko, /en)
-- **Framer Motion**: 레이아웃 전환 및 인터랙션 애니메이션
-- **Vanilla CSS (Variables)**: Raycast 스타일 디자인 시스템
-- **AI Strategy**: AI 도구 우선 런칭 (Language, Vision, Voice, Builder, Infra 분류)
-- **SEO Strategy**: 다국어 지원 (/en), 개별 리소스별 상세 페이지, JSON-LD 스키마
-- **Monetization**: Affiliate Tag 기반 Proxy Redirect 시스템 도입
-- **Rendering**: ISR (Incremental Static Regeneration) 적용으로 가격 실시간성 확보
-
-## ⚠️ 주의 사항 및 이슈
-- 디자인 퀄리티가 프로젝트의 핵심이므로, 대충 만든 컴포넌트는 지양할 것.
-- SSG를 적극 활용하여 런타임 성능을 극한으로 끌어올릴 것.
+## 🛠️ 기술 스택 (현행화)
+- **Framework**: Next.js 16.2.4 (App Router)
+- **i18n**: Next-Intl (Prefix-based)
+- **Content**: Dynamic Analysis Engine (Compare/Detail)
+- **Design**: Vanilla CSS + Framer Motion (Raycast-inspired)
+- **Database**: Supabase (Persistent Sharing)

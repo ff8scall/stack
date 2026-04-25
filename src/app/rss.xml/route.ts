@@ -1,35 +1,35 @@
-import { bricks } from '@/data/bricks';
+import { blogPosts } from '@/data/posts';
 
 export async function GET() {
   const baseUrl = 'https://stack.lego-sia.com';
   
-  const items = bricks.slice(0, 20).map(brick => `
-    <item>
-      <title><![CDATA[${brick.name} - ${brick.killerFeature}]]></title>
-      <link>${baseUrl}/ko</link>
-      <guid>${brick.id}</guid>
-      <pubDate>${new Date(brick.lastUpdated).toUTCString()}</pubDate>
-      <description><![CDATA[Category: ${brick.category} | DX Score: ${brick.dxScore}]]></description>
-    </item>
-  `).join('');
+  const rssItems = blogPosts
+    .map((post) => `
+      <item>
+        <title><![CDATA[${post.title.ko} | ${post.title.en}]]></title>
+        <link>${baseUrl}/ko/blog/${post.slug}</link>
+        <guid>${baseUrl}/ko/blog/${post.slug}</guid>
+        <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+        <description><![CDATA[${post.excerpt.ko}]]></description>
+      </item>
+    `)
+    .join('');
 
   const rss = `<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>LegoStack - Latest AI Tools</title>
-    <link>${baseUrl}</link>
-    <description>The most beautiful and powerful AI bricks for solo developers.</description>
-    <language>ko</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
-    ${items}
-  </channel>
-</rss>`;
+    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+      <channel>
+        <title>LegoStack AI FinOps Blog</title>
+        <link>${baseUrl}</link>
+        <description>Professional insights on AI infrastructure cost and performance optimization.</description>
+        <language>ko-KR</language>
+        <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+        ${rssItems}
+      </channel>
+    </rss>`;
 
   return new Response(rss, {
     headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': 's-maxage=3600, stale-while-revalidate',
+      'Content-Type': 'application/xml; charset=utf-8',
     },
   });
 }

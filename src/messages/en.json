@@ -4,7 +4,26 @@
     "description": "Discover the most beautiful and powerful AI bricks for solo developers.",
     "bill": "Est. Monthly Bill",
     "mau": "Simulation MAU",
-    "view_details": "View Details"
+    "view_details": "View Details",
+    "hero_title": "Discover the Real Cost of AI Infrastructure",
+    "hero_subtitle": "From solo devs to scale-ups, simulate 22+ AI tool combinations in real-time and build your perfect stack.",
+    "hero_cta": "Start Simulating Now",
+    "hero_counter_prefix": "Estimated monthly cost for 100k MAU:",
+    "hero_counter_suffix": "",
+    "killer_label": "Key:",
+    "add_to_stack": "Add to Stack",
+    "selected": "Selected",
+    "user_scale": "User Scale",
+    "daily_intensity": "Daily Intensity",
+    "share": "Share",
+    "breakdown": "Breakdown",
+    "hide": "Hide",
+    "stack_breakdown": "Stack Cost Breakdown",
+    "download_report": "Download Report",
+    "capturing": "Capturing...",
+    "tip_prefix": "💡 Tip:",
+    "tip_message": "usage level assumed. Share this stack with your team to discuss cost optimization.",
+    "last_updated_label": "Last Updated"
   },
   "Categories": {
     "All": "All",
@@ -18,112 +37,222 @@
     "openai-gpt41": {
       "name": "GPT-4.1",
       "feature": "75% Caching efficiency & perfect structured output",
-      "alt": "Alternative to Claude 4.6"
+      "alt": "Alternative to Claude 4.6",
+      "description": "OpenAI's next-generation large language model, significantly improving intelligence while lowering cost per token. It sets the industry standard for complex logical reasoning and structured data extraction in JSON format.",
+      "pros": ["Industry-leading structured data output", "75% improved prompt caching system", "Massive plugin and tool ecosystem"],
+      "cons": ["Relatively high output costs", "Occasional latency during peak hours"],
+      "useCases": ["Complex logic analysis", "Data extraction pipelines", "Intelligent autonomous agents"],
+      "bestFor": "Enterprise apps requiring sophisticated business logic and data integrity"
     },
     "anthropic-claude46": {
       "name": "Claude 4.6",
       "feature": "TTL-controlled caching & superior coding reasoning",
-      "alt": "Alternative to GPT-4.1"
+      "alt": "Alternative to GPT-4.1",
+      "description": "Anthropic's most powerful model, known for its natural, human-like writing style and exceptional coding capabilities. It supports a massive context window, allowing for the analysis of hundreds of pages of documentation at once.",
+      "pros": ["Natural writing and strict safety guidelines", "Superior coding and mathematical reasoning", "Flexible TTL-controlled caching"],
+      "cons": ["Slower response times compared to mini models", "Higher input costs for long contexts"],
+      "useCases": ["Long-form document analysis", "Software engineering automation", "Creative writing and drafting"],
+      "bestFor": "Services centered on code generation and massive document context analysis"
     },
     "deepseek-v3": {
       "name": "DeepSeek V3.2",
       "feature": "Global price floor & OpenAI API compatibility",
-      "alt": "Alternative to GPT-4.1-mini"
+      "alt": "Alternative to GPT-4.1-mini",
+      "description": "A 'price disruptor' model boasting incredible cost-performance ratios. Fully compatible with the OpenAI API, it allows developers to instantly reduce costs by over 90% without significant code changes.",
+      "pros": ["Industry-lowest token costs", "Perfect compatibility with OpenAI SDK", "Fast inference speeds"],
+      "cons": ["Slightly lower nuance in non-English languages", "Relatively narrower context window"],
+      "useCases": ["Cost-effective chatbots", "Massive data summarization", "Basic text classification"],
+      "bestFor": "Startups aiming to minimize API costs while maintaining solid performance"
     },
     "groq-llama33": {
       "name": "Groq LPU",
       "feature": "300+ TPS ultra-fast real-time inference",
-      "alt": "Alternative to OpenAI API"
+      "alt": "Alternative to OpenAI API",
+      "description": "Utilizing specialized LPU (Language Processing Unit) hardware rather than traditional GPUs, Groq provides mind-blowing speed. It's optimized for real-time conversations and interactive interfaces requiring near-zero latency.",
+      "pros": ["Unrivaled ultra-low latency", "Optimized streaming for real-time chat", "Proven performance with Llama 3 models"],
+      "cons": ["Limited model selection (Llama, Mixtral)", "Less reasoning depth than flagship frontier models"],
+      "useCases": ["Real-time voice conversation", "Instant code review", "Immediate customer support bots"],
+      "bestFor": "Interactive services requiring a 'wait-free' real-time user experience"
     },
     "gemini-3-pro": {
       "name": "Gemini 3 Pro",
       "feature": "Massive free tier & Google ecosystem integration",
-      "alt": "Alternative to GPT-4.1"
+      "alt": "Alternative to GPT-4.1",
+      "description": "Google's flagship multimodal model, excelling in text, image, and video analysis. Its strengths lie in tight integration with the Google Cloud ecosystem and an industry-leading 2M context window.",
+      "pros": ["Massive 2M token context window", "Native grounding with Google Search", "Generous free tier for developers"],
+      "cons": ["Strict safety filters can be over-conservative", "More complex API dashboard than competitors"],
+      "useCases": ["Video content analysis", "Google Workspace integrated apps", "Massive codebase analysis"],
+      "bestFor": "Projects leveraging the Google ecosystem or requiring ultra-long context analysis"
     },
     "fal-ai": {
       "name": "fal.ai",
       "feature": "Sub-millisecond real-time image generation API",
-      "alt": "Alternative to Replicate"
+      "alt": "Alternative to Replicate",
+      "description": "A high-speed real-time media generation platform boasting industry-leading latency. It provides optimized inference for the latest models like Flux and Stable Diffusion in milliseconds, maximizing user experience.",
+      "pros": ["Incredible sub-millisecond image generation", "Fastest updates for latest open-source models", "Native WebSocket support for real-time streaming"],
+      "cons": ["Relatively narrow API functional scope", "Cumulative costs for high-load operations"],
+      "useCases": ["Real-time canvas editing apps", "Instant in-game asset generation", "Interactive marketing campaigns"],
+      "bestFor": "Next-gen AI creative tools where real-time responsiveness is critical"
     },
     "replicate": {
       "name": "Replicate",
       "feature": "Serverless GPU deployment for open-source models",
-      "alt": "Alternative to fal.ai"
+      "alt": "Alternative to fal.ai",
+      "description": "A serverless machine learning platform that lets you run tens of thousands of open-source AI models with a single line of code. It removes infrastructure headaches, allowing anyone to deploy and scale models easily via Python or HTTP API.",
+      "pros": ["Tens of thousands of community models available", "Precise pay-as-you-go billing model", "Easy custom model training and deployment"],
+      "cons": ["Latency caused by cold starts", "Higher unit costs compared to self-hosting"],
+      "useCases": ["Experimenting with various open-source models", "Specialized image processing pipelines", "Research and prototyping"],
+      "bestFor": "Developers and teams needing to experiment and launch services quickly"
     },
     "runway-gen4": {
       "name": "Runway Gen-4",
       "feature": "Enterprise-grade video quality & motion control",
-      "alt": "Alternative to Sora"
+      "alt": "Alternative to Sora",
+      "description": "A pioneering platform in AI video production, generating high-quality video from text or images. Unique control tools like 'Multi Motion Brush' provide a professional-grade video editing experience.",
+      "pros": ["Industry-leading video generation quality", "Superior in-video motion control features", "Professional video editing tool integration"],
+      "cons": ["High subscription costs", "Significant time required for long video generation"],
+      "useCases": ["Professional advertising and promotional videos", "Visual effects for film and music videos", "High-quality social media content"],
+      "bestFor": "Professional production houses and creative agencies where quality is non-negotiable"
     },
     "leonardo-ai": {
       "name": "Leonardo.ai",
       "feature": "Team-based custom model training & style ref",
-      "alt": "Alternative to Midjourney"
+      "alt": "Alternative to Midjourney",
+      "description": "An AI image generation platform specialized in game assets and character design. Its greatest strength is the ability for users to train their own models to maintain a unique and consistent style.",
+      "pros": ["Sophisticated style control and consistency", "Canvas and asset management for team collaboration", "Support for custom model training"],
+      "cons": ["UI can be complex for beginners", "High costs for top-tier performance models"],
+      "useCases": ["Game character and background concept art", "Consistent brand image generation", "Digital art production"],
+      "bestFor": "Game studios and designers requiring unique art styles and design consistency"
     },
     "cartesia-sonic": {
       "name": "Cartesia",
       "feature": "90ms low-latency TTFA & emotional expression",
-      "alt": "Alternative to ElevenLabs"
+      "alt": "Alternative to ElevenLabs",
+      "description": "A next-generation speech synthesis engine designed for real-time conversational AI. Via the Sonic model, it generates human-like voices with sub-100ms latency, enabling real-time emotional control.",
+      "pros": ["World-leading ultra-low latency", "Real-time emotion and tone control", "Stable streaming output"],
+      "cons": ["Relatively fewer supported languages", "Newer service with growing ecosystem"],
+      "useCases": ["AI customer service agents", "Interactive virtual characters", "Real-time translation services"],
+      "bestFor": "Real-time voice agent services where natural conversation flow is essential"
     },
     "deepgram-nova": {
       "name": "Deepgram",
       "feature": "Pay-as-you-go high-performance audio pipeline",
-      "alt": "Alternative to ElevenLabs"
+      "alt": "Alternative to ElevenLabs",
+      "description": "Enterprise-grade audio infrastructure covering both Speech-to-Text (STT) and Text-to-Speech (TTS). Its ultra-low latency and accuracy have made it a standard for large-scale call centers and media companies worldwide.",
+      "pros": ["Affordable and transparent pay-as-you-go pricing", "Stability for processing massive audio volumes", "Various domain-specific models provided"],
+      "cons": ["Initial setup and API integration complexity", "Slightly less variety in emotional expression"],
+      "useCases": ["Large-scale call center analytics", "Real-time caption generation", "Podcast transcription"],
+      "bestFor": "Audio services requiring cost-efficiency and large-scale stability"
     },
     "elevenlabs-v3": {
       "name": "ElevenLabs",
       "feature": "World's #1 multi-lingual voice synthesis",
-      "alt": "Alternative to Deepgram"
+      "alt": "Alternative to Deepgram",
+      "description": "The undisputed leader in TTS, creating the most human-like voices. It offers voice cloning from just a few seconds of samples and native-level naturalness in over 70 languages.",
+      "pros": ["Industry-best voice naturalness and quality", "Powerful instant voice cloning features", "Widest range of multi-lingual support"],
+      "cons": ["Higher costs compared to competitors", "Significant latency for real-time dialogue"],
+      "useCases": ["Audiobook and narration production", "Automatic video dubbing", "Personalized voice notifications"],
+      "bestFor": "Content creation and premium services where quality is the top priority"
     },
     "hume-evi": {
       "name": "Hume AI",
       "feature": "Empathic voice interface syncing with user emotions",
-      "alt": "Real-time chat agent"
+      "alt": "Real-time chat agent",
+      "description": "An empathic AI that goes beyond information delivery to understand emotional nuances in a user's voice and react accordingly. Optimized for building interfaces that feel emotionally connected to humans.",
+      "pros": ["Unique emotion analysis and reaction tech", "Supports real-time dialogue flow and interruption", "Expressive and unique voice models"],
+      "cons": ["Narrow versatility as a specialized model", "Significantly high enterprise-level costs"],
+      "useCases": ["Mental health management chatbots", "Sophisticated personalized assistants", "Interactive storytelling"],
+      "bestFor": "Wellness and services where emotional empathy and connection are core values"
     },
     "pydantic-ai": {
       "name": "PydanticAI",
       "feature": "Type-safe framework for strict structured agents",
-      "alt": "Alternative to LangChain"
+      "alt": "Alternative to LangChain",
+      "description": "An agent framework built by the Pydantic team. It enforces model inputs and outputs via a robust type system, preventing runtime errors and enabling the construction of reliable AI apps in large-scale production environments.",
+      "pros": ["Strong type safety and validation logic", "Clean and Pythonic API design", "Seamless integration with Pydantic ecosystem"],
+      "cons": ["Relatively newer framework with a smaller community", "No JavaScript/TypeScript support (Python only)"],
+      "useCases": ["Complex business logic agents", "Data validation critical pipelines", "Microservice-based AI apps"],
+      "bestFor": "Developers preferring Python's type system for building robust backend AI agents"
     },
     "vercel-ai-sdk": {
       "name": "Vercel AI SDK",
       "feature": "Next.js optimized & Generative UI integration",
-      "alt": "Alternative to LangChain"
+      "alt": "Alternative to LangChain",
+      "description": "The fastest way to build aesthetic AI UIs in Next.js and React. From handling streaming responses to implementing complex Generative UIs, it empowers frontend developers to gain full control over AI features.",
+      "pros": ["Perfect synergy with Next.js and React", "Unrivaled ease for implementing Generative UI", "Unified interface for various LLM models"],
+      "cons": ["Dependency on the Vercel ecosystem", "Frontend-centric logic can limit complex backend processing"],
+      "useCases": ["AI-powered dashboards", "Real-time streaming chatbot UIs", "Dynamic interactive AI apps"],
+      "bestFor": "Frontend engineers aiming to provide the best user interaction based on React/Next.js"
     },
     "langgraph-cloud": {
       "name": "LangGraph",
       "feature": "State machine-based explicit workflow control",
-      "alt": "Alternative to simple chaining"
+      "alt": "Alternative to simple chaining",
+      "description": "A core module of the LangChain ecosystem that enables designing complex agent logic in the form of cyclic graphs. It handles state management explicitly, precisely controlling agents to achieve goals without getting lost.",
+      "pros": ["Full support for complex cyclic logic", "Sophisticated state management and checkpointing", "Extensive integration with LangChain ecosystem"],
+      "cons": ["Relatively steep learning curve", "Management can become difficult as designs get complex"],
+      "useCases": ["Multi-step workflow automation", "Complex agent orchestration", "Self-correction loop implementation"],
+      "bestFor": "Architects designing advanced multi-step agents that go beyond simple Q&A"
     },
     "composio": {
       "name": "Composio",
       "feature": "200+ SaaS tool integration & auth automation",
-      "alt": "Alternative to Zapier"
+      "alt": "Alternative to Zapier",
+      "description": "A tooling platform that enables AI agents to freely interact with hundreds of tools like Slack, GitHub, and Google Calendar. It automates complex API authentication, extending the scope of agent actions to the real world.",
+      "pros": ["Instant integration with 200+ SaaS tools", "Automated OAuth and session management", "Easy definition of custom tools for agents"],
+      "cons": ["Requires time for stability as a newer service", "Dependency risk based on individual tool API changes"],
+      "useCases": ["SaaS integration automation agents", "AI-powered personal assistants", "Enterprise tool integration solutions"],
+      "bestFor": "Agent developers needing real-world actions via integration with business tools"
     },
     "pinecone-serverless": {
       "name": "Pinecone",
       "feature": "Industry standard for serverless vector DBs",
-      "alt": "Alternative to Weaviate"
+      "alt": "Alternative to Weaviate",
+      "description": "A pioneer in vector search, critical for RAG (Retrieval-Augmented Generation) systems. Its serverless architecture ensures ultra-low latency search performance regardless of data volume, removing infrastructure management burdens.",
+      "pros": ["Proven industry-standard stability and performance", "Serverless scalability without infra management", "Vast community guides and ecosystem"],
+      "cons": ["Relatively high pricing structure", "Limited highly-customized index settings"],
+      "useCases": ["Enterprise-grade RAG systems", "Real-time recommendation engines", "Similar image search services"],
+      "bestFor": "RAG-based services handling massive data where performance and stability are paramount"
     },
     "upstash-vector": {
       "name": "Upstash Vector",
       "feature": "True per-request billing & edge-optimized DB",
-      "alt": "Alternative to Pinecone"
+      "alt": "Alternative to Pinecone",
+      "description": "An edge-based vector DB from Upstash, a leader in serverless databases. It bills only for the actual number of requests made regardless of index size, providing overwhelming cost efficiency for early-stage projects.",
+      "pros": ["Most rational pay-per-request billing model", "Fast response speeds in edge environments", "Intuitive and simple integration experience"],
+      "cons": ["Decreased cost efficiency for massive static data storage", "Relatively fewer advanced features compared to Pinecone"],
+      "useCases": ["Cost-optimized RAG systems", "Edge computing-based AI apps", "Solo developer projects"],
+      "bestFor": "Lean AI startups where traffic is unpredictable or cost reduction is top priority"
     },
     "helicone": {
       "name": "Helicone",
       "feature": "Cost savings via smart caching & observability",
-      "alt": "Alternative to LangSmith"
+      "alt": "Alternative to LangSmith",
+      "description": "An observability platform that monitors and intercepts LLM API calls to reduce costs. With one click, enable prompt caching to zero out costs for redundant requests.",
+      "pros": ["Immediate caching support for cost reduction", "Detailed dashboard for token usage and cost analysis", "Simple proxy-based integration method"],
+      "cons": ["Simpler debugging features compared to other observability tools", "Data privacy and proxy dependency concerns"],
+      "useCases": ["LLM cost monitoring and reduction", "Prompt versioning and testing", "Full-stack latency analysis"],
+      "bestFor": "Teams needing immediate monitoring and caching as API costs increase rapidly"
     },
     "braintrust": {
       "name": "Braintrust",
       "feature": "AI quality evaluation & regression testing platform",
-      "alt": "Manual evaluation alternative"
+      "alt": "Manual evaluation alternative",
+      "description": "An engineering platform for quantitatively measuring and managing AI app 'quality'. It helps build datasets, automatic evaluation logic (Evals), and prevents performance regression during model updates.",
+      "pros": ["Highly optimized automatic evaluation (Eval) pipelines", "Model performance comparison and regression testing", "Powerful dashboard for data-driven development"],
+      "cons": ["High enterprise-level entry costs", "Initial dataset construction and setup overhead"],
+      "useCases": ["Production-grade AI service quality management", "Model fine-tuning result verification", "Prompt engineering optimization"],
+      "bestFor": "Production teams where reliable and accurate answers beyond simple chat are essential"
     },
     "supabase-db": {
       "name": "Supabase",
       "feature": "Most complete BaaS based on PostgreSQL",
-      "alt": "Alternative to Firebase"
+      "alt": "Alternative to Firebase",
+      "description": "Started as an open-source Firebase alternative and is now the most powerful backend platform supporting full vector search via pgvector. It integrates auth, storage, and database into one to maximize development speed.",
+      "pros": ["All features of powerful PostgreSQL available", "Integrated vector search support via pgvector", "Complete full-stack experience from auth to DB"],
+      "cons": ["Slightly steeper initial learning curve than Firebase", "Index management can become complex as data grows"],
+      "useCases": ["Full-stack AI application backends", "Real-time collaboration tools", "Complex web services including vector data"],
+      "bestFor": "Pragmatic developers wanting to solve stable relational DB and vector search at once"
     }
   },
   "Context": {
@@ -144,6 +273,74 @@
     "modal_description": "Share your simulation results with colleagues and discuss the architecture.",
     "copy_link": "Copy Link",
     "close": "Close",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "share_alert": "🔗 Share link copied!\nSend this link to show your exact stack configuration.",
+    "share_error": "Failed to copy the link."
+  },
+  "Footer": {
+    "rights": "© 2026 LegoStack. All rights reserved.",
+    "description": "FinOps simulator helping you build aesthetic and efficient AI infrastructure.",
+    "links": {
+      "blog": "Blog",
+      "github": "GitHub",
+      "about": "About",
+      "privacy": "Privacy Policy",
+      "contact": "Contact"
+    }
+  },
+  "Compare": {
+    "title": "{name1} vs {name2} Full Cost & Performance Comparison | LegoStack",
+    "description": "Compare {name1} and {name2} side-by-side. Analyze API pricing, DX scores, and killer features to choose the best infrastructure.",
+    "versus": "VS",
+    "back_to_list": "Back to Hub",
+    "winner_badge": "Winner",
+    "features": "Killer Features",
+    "pricing": "Pricing Model",
+    "simulate_this": "Simulate with this",
+    "dx_analysis": "LegoStack Analysis Report",
+    "comparison_insight": "A deep-dive analysis of {name1} (DX {score1}) and {name2} (DX {score2}). While {name1} excels in {feature1}, {name2} offers superior performance in {feature2}. Discover the actual cost difference based on your project scale now."
+  },
+  "Blog": {
+    "title": "AI FinOps Insights",
+    "subtitle": "Practical guides for cost optimization and architecture design.",
+    "read_more": "Read More",
+    "back_to_blog": "Back to Blog",
+    "published_at": "Published",
+    "author": "Author",
+    "minutes_read": "min read"
+  },
+  "BrickDetail": {
+    "back": "Back to Hub",
+    "visit": "Visit Site",
+    "killer": "Killer Feature",
+    "overview": "Overview",
+    "pros": "Pros",
+    "cons": "Cons",
+    "ideal_for": "Ideal For",
+    "use_cases": "Top Use Cases",
+    "related_title": "Related Tools & Comparisons",
+    "view_analysis": "View Analysis",
+    "pricing_title": "Pricing Structure",
+    "metadata_title": "Metadata",
+    "last_updated": "Last Updated",
+    "website": "Official Website",
+    "reliability": "Reliability",
+    "verified": "Verified by LegoStack",
+    "insight_title": "AI FinOps Insight",
+    "insight_desc": "{name} holds a unique position in the {category} sector. In particular, the {feature} feature significantly boosts developer productivity. Use the LegoStack calculator to precisely estimate costs based on your scale.",
+    "input": "Input",
+    "output": "Output",
+    "monthly": "Monthly",
+    "free_quota": "Free Quota",
+    "none": "None",
+    "per": "Per",
+    "dx_label": "DX Score",
+    "intelligence": "Intelligence",
+    "speed": "Speed",
+    "accuracy": "Accuracy",
+    "efficiency_label": "Efficiency Score",
+    "context_window": "Context Window",
+    "max_output": "Max Output Limit",
+    "regions": "Supported Regions"
   }
 }

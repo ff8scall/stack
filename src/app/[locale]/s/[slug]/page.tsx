@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
-import ShareHydrator from '@/components/ShareHydrator';
+import SharedStackView from '@/components/SharedStackView';
 import { deserializeStack } from '@/lib/serialize';
 import { Metadata } from 'next';
 
@@ -9,7 +9,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
 
   const { data } = await supabase
     .from('shared_stacks')
@@ -23,8 +23,12 @@ export async function generateMetadata({
   const brickCount = state?.i.length || 0;
 
   return {
-    title: `My AI Stack (${brickCount} tools) | LegoStack`,
-    description: `Check out this AI FinOps simulation on LegoStack. Estimated Monthly Total: ${state?.m.toLocaleString()} MAU.`,
+    title: locale === 'ko' 
+      ? `나의 AI 스택 (${brickCount}개 도구) | LegoStack`
+      : `My AI Stack (${brickCount} tools) | LegoStack`,
+    description: locale === 'ko'
+      ? `LegoStack에서 시뮬레이션된 AI 인프라 견적을 확인해보세요. 예상 규모: ${state?.m.toLocaleString()} MAU.`
+      : `Check out this AI FinOps simulation on LegoStack. Estimated Monthly Total: ${state?.m.toLocaleString()} MAU.`,
     openGraph: {
       images: [
         {
@@ -60,5 +64,5 @@ export default async function SharedStackPage({
     notFound();
   }
 
-  return <ShareHydrator compressedData={data.stack_data} locale={locale} />;
+  return <SharedStackView compressedData={data.stack_data} locale={locale} />;
 }

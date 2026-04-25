@@ -75,3 +75,57 @@ export function formatCurrency(amount: number, currency: 'USD' | 'KRW'): string 
   }
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
 }
+
+/**
+ * 가성비 점수 (Value for Money) 계산 로직
+ * 벤치마크 점수와 비용을 결합하여 0~100 사이의 점수를 산출합니다.
+ */
+export function calculateEfficiencyScore(
+  performance: { intelligence: number; speed: number; accuracy: number; benchmarkScore: number },
+  pricing: PricingData
+): number {
+  // 1. 성능 지수 (Performance Index)
+  // 공인 벤치마크 점수에 높은 가중치(60%)를 부여하고, 나머지 지표를 결합
+  const perfIndex = 
+    (performance.benchmarkScore * 0.6) + 
+    (performance.intelligence * 0.2) + 
+    (performance.speed * 0.1) + 
+    (performance.accuracy * 0.1);
+  
+  // 2. 비용 지수 (Cost Factor Index) - 낮을수록 가성비에 유리
+  let costFactor = 1;
+  const LOG_BASE = 1.5; // 비용 차이를 완만하게 반영하기 위한 로그 밑
+
+  switch (pricing.type) {
+    case 'token':
+      // 토큰 단가가 낮을수록 가성비 급상승 (예: DeepSeek)
+      costFactor = ((pricing.inputPrice || 0) + (pricing.outputPrice || 0)) / 2;
+      if (costFactor < 0.5) costFactor = 0.5; // 극단적 저가 모델 보정
+      break;
+    case 'request':
+      costFactor = (pricing.unitPrice || 0.01) * 100; // 100회 요청 기준 비용화
+      break;
+    case 'subscription':
+      costFactor = (pricing.monthlyPrice || 20) / 10; // 월 구독료를 토큰 비용 규모로 정규화
+      break;
+    case 'infra':
+      costFactor = (pricing.unitPrice || 1) * 2;
+      break;
+    case 'free':
+      costFactor = 0.3; // 무료 도구는 최상의 가성비 부여
+      break;
+  }
+
+  // 무료 티어가 크면 가성비 보너스 (최대 20% 할인 효과)
+  const freeBonus = pricing.freeQuota > 0 ? Math.min(0.2, Math.log10(pricing.freeQuota) / 10) : 0;
+  const effectiveCostFactor = costFactor * (1 - freeBonus);
+
+  // 3. 최종 가성비 점수 산출
+  // Formula: Performance / Log(Cost + Offset)
+  const efficiency = perfIndex / (1 + Math.log(effectiveCostFactor + 1) / Math.log(LOG_BASE));
+  
+  // 4. 결과값 보정 (80~100 사이가 'Best Value' 영역이 되도록 스케일링)
+  const scaledScore = (efficiency * 0.8) + 15;
+  
+  return Math.min(100, Math.round(scaledScore));
+}

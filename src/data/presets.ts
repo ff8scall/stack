@@ -23,7 +23,7 @@ export const presets: Preset[] = [
       ko: "최소한의 비용으로 강력한 AI 앱을 구축하는 표준 조합",
       en: "The standard combo for building AI apps with minimal cost"
     },
-    brickIds: ["openai-gpt4o", "supabase-db", "v0-dev"],
+    brickIds: ["openai-gpt41", "supabase-db", "vercel-ai-sdk"],
     color: "#74aa9c"
   },
   {
@@ -36,7 +36,7 @@ export const presets: Preset[] = [
       ko: "복잡한 추론과 긴 문맥 처리가 필요한 엔터프라이즈급 구성",
       en: "Enterprise-grade config for complex reasoning and long context"
     },
-    brickIds: ["anthropic-claude4", "supabase-db", "gemini-3-pro"],
+    brickIds: ["anthropic-claude46", "supabase-db", "gemini-3-pro"],
     color: "#d97757"
   },
   {
@@ -49,7 +49,7 @@ export const presets: Preset[] = [
       ko: "이미지, 음성, UI 생성을 아우르는 창작자용 스택",
       en: "Creator stack for image, voice, and UI generation"
     },
-    brickIds: ["midjourney-v7", "elevenlabs-v3", "v0-dev"],
+    brickIds: ["fal-ai", "elevenlabs-v3", "runway-gen4"],
     color: "#3b82f6"
   }
 ];
