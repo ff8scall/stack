@@ -6,6 +6,7 @@ import { Star, ArrowLeft, Zap, Box, DollarSign, ArrowRight, TrendingUp, ShieldCh
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { calculateEfficiencyScore } from '@/lib/calculator';
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
