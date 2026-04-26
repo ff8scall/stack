@@ -174,24 +174,24 @@ export default async function BrickDetailPage({
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <span style={{ opacity: 0.6 }}>{tDetail('input')}</span>
-                      <span className="mono" style={{ fontWeight: '700' }}>${brick.pricing.inputPrice}/1M</span>
+                      <span className="mono" style={{ fontWeight: '700' }}>{formatCurrency(brick.pricing.inputPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/1M</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <span style={{ opacity: 0.6 }}>{tDetail('output')}</span>
-                      <span className="mono" style={{ fontWeight: '700' }}>${brick.pricing.outputPrice}/1M</span>
+                      <span className="mono" style={{ fontWeight: '700' }}>{formatCurrency(brick.pricing.outputPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/1M</span>
                     </div>
                   </div>
                 )}
                 {brick.pricing.type === 'subscription' && (
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span style={{ opacity: 0.6 }}>{tDetail('monthly')}</span>
-                    <span className="mono" style={{ fontWeight: '700' }}>${brick.pricing.monthlyPrice}/mo</span>
+                    <span className="mono" style={{ fontWeight: '700' }}>{formatCurrency(brick.pricing.monthlyPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/mo</span>
                   </div>
                 )}
                 {brick.pricing.type === 'infra' && (
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span style={{ opacity: 0.6 }}>{tDetail('per')} {brick.pricing.unitName}</span>
-                    <span className="mono" style={{ fontWeight: '700' }}>${brick.pricing.unitPrice}</span>
+                    <span className="mono" style={{ fontWeight: '700' }}>{formatCurrency(brick.pricing.unitPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}</span>
                   </div>
                 )}
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '1rem', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
@@ -266,21 +266,29 @@ export default async function BrickDetailPage({
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#10b981' }}>{tDetail('pros')}</h4>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {Array.isArray(t.raw(`${brick.id}.pros`)) && (t.raw(`${brick.id}.pros`) as string[]).map((pro, i) => (
-                  <li key={i} style={{ fontSize: '0.95rem', display: 'flex', gap: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>
-                    <Zap size={16} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} /> {pro}
-                  </li>
-                ))}
+                {Array.isArray(t.raw(`${brick.id}.pros`)) && (t.raw(`${brick.id}.pros`) as string[]).length > 0 ? (
+                  (t.raw(`${brick.id}.pros`) as string[]).map((pro, i) => (
+                    <li key={i} style={{ fontSize: '0.95rem', display: 'flex', gap: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>
+                      <Zap size={16} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} /> {pro}
+                    </li>
+                  ))
+                ) : (
+                  <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.3)', fontStyle: 'italic' }}>{tDetail('empty_state')}</p>
+                )}
               </ul>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#ef4444' }}>{tDetail('cons')}</h4>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {Array.isArray(t.raw(`${brick.id}.cons`)) && (t.raw(`${brick.id}.cons`) as string[]).map((con, i) => (
-                  <li key={i} style={{ fontSize: '0.95rem', display: 'flex', gap: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>
-                    <Activity size={16} color="#ef4444" style={{ flexShrink: 0, marginTop: '2px' }} /> {con}
-                  </li>
-                ))}
+                {Array.isArray(t.raw(`${brick.id}.cons`)) && (t.raw(`${brick.id}.cons`) as string[]).length > 0 ? (
+                  (t.raw(`${brick.id}.cons`) as string[]).map((con, i) => (
+                    <li key={i} style={{ fontSize: '0.95rem', display: 'flex', gap: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>
+                      <Activity size={16} color="#ef4444" style={{ flexShrink: 0, marginTop: '2px' }} /> {con}
+                    </li>
+                  ))
+                ) : (
+                  <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.3)', fontStyle: 'italic' }}>{tDetail('empty_state')}</p>
+                )}
               </ul>
             </div>
           </div>

@@ -341,6 +341,9 @@
     "efficiency_label": "Efficiency Score",
     "context_window": "Context Window",
     "max_output": "Max Output Limit",
-    "regions": "Supported Regions"
+    "regions": "Supported Regions",
+    "empty_state": "Detailed information is coming soon.",
+    "related_title": "Related AI Bricks",
+    "view_analysis": "View Detailed Analysis"
   }
 }

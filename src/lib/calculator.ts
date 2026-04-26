@@ -66,14 +66,29 @@ export function calculateTotalCost(bricks: { pricing: PricingData, baseUsage?: n
 }
 
 /**
- * USD 금액을 KRW로 변환합니다. (현재 고정 환율 1,350원 적용)
+ * 로케일에 따른 기본 통화를 반환합니다.
+ */
+export function getCurrencyByLocale(locale: string): 'USD' | 'KRW' {
+  return locale === 'ko' ? 'KRW' : 'USD';
+}
+
+/**
+ * USD 금액을 특정 통화 포맷으로 변환합니다.
  */
 export function formatCurrency(amount: number, currency: 'USD' | 'KRW'): string {
   if (currency === 'KRW') {
-    const krwAmount = amount * 1350;
-    return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(krwAmount);
+    // 1,350원 고정 환율 적용 (추후 API 연동 가능)
+    const krwAmount = Math.round(amount * 1350);
+    return new Intl.NumberFormat('ko-KR', { 
+      style: 'currency', 
+      currency: 'KRW',
+      maximumFractionDigits: 0 
+    }).format(krwAmount);
   }
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+  return new Intl.NumberFormat('en-US', { 
+    style: 'currency', 
+    currency: 'USD' 
+  }).format(amount);
 }
 
 /**

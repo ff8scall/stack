@@ -59,7 +59,10 @@ export const useStackStore = create<StackState>()(
       setFullState: (data) => set((state) => ({ ...state, ...data })),
     }),
     {
-      name: 'legostack-storage', // 로컬 스토리지에 자동 저장 (새로고침 시 유지)
+      name: 'legostack-storage', // 로컬 스토리지에 자동 저장
+      partialize: (state) => Object.fromEntries(
+        Object.entries(state).filter(([key]) => !['currency'].includes(key))
+      ) as StackState,
     }
   )
 );

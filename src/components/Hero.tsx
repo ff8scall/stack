@@ -1,26 +1,33 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ArrowRight } from 'lucide-react';
+import { useStackStore } from '@/store/useStackStore';
 
 export default function Hero() {
   const t = useTranslations('Index');
   const [isMounted, setIsMounted] = useState(false);
+  const { currency } = useStackStore();
 
   // 시뮬레이션용 숫자 애니메이션
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest).toLocaleString());
+  const rounded = useTransform(count, (latest) => {
+    const val = Math.round(latest);
+    return val.toLocaleString();
+  });
 
   useEffect(() => {
     setIsMounted(true);
-    const controls = animate(count, 1240500, {
+    // USD 기준 약 920달러, KRW 기준 약 124만원
+    const targetValue = currency === 'KRW' ? 1240500 : 920; 
+    const controls = animate(count, targetValue, {
       duration: 2,
       ease: "easeOut",
     });
     return controls.stop;
-  }, [count]);
+  }, [count, currency]);
 
   if (!isMounted) return null;
 
@@ -124,7 +131,7 @@ export default function Hero() {
             {t('hero_counter_prefix')}
           </span>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem' }}>
-            <span style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.3)', fontWeight: '700' }}>₩</span>
+            <span style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.3)', fontWeight: '700' }}>{currency === 'KRW' ? '₩' : '$'}</span>
             <motion.span 
               className="mono"
               style={{ 
@@ -137,7 +144,7 @@ export default function Hero() {
               {rounded}
             </motion.span>
             <span style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.4)', fontWeight: '600' }}>
-              {t('hero_counter_suffix')}
+              {currency === 'KRW' ? t('hero_counter_suffix') : '/mo'}
             </span>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { useStackStore } from '@/store/useStackStore';
 import { bricks } from '@/data/bricks';
-import { calculateMonthlyCost, calculateTotalCost, formatCurrency } from '@/lib/calculator';
+import { calculateMonthlyCost, calculateTotalCost, formatCurrency, getCurrencyByLocale } from '@/lib/calculator';
 import { useEffect, useState } from 'react';
 import { ChevronUp, ChevronDown, Box, Share2, Copy, Check, Image } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
@@ -31,6 +31,14 @@ export default function CalculatorBar() {
     const cost = calculateTotalCost(selectedBricks, { mau, avgUsagePerUser });
     setTotal(cost);
   }, [selectedBrickIds, mau, avgUsagePerUser]);
+
+  // 로케일 기반 초기 통화 설정
+  useEffect(() => {
+    const expectedCurrency = getCurrencyByLocale(locale);
+    if (currency !== expectedCurrency) {
+      setCurrency(expectedCurrency);
+    }
+  }, [locale]);
 
   const getMauContext = (val: number) => {
     if (val <= 1000) return tContext('mau_low');
@@ -194,6 +202,28 @@ export default function CalculatorBar() {
             }
           }
           .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+          .currency-toggle {
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            padding: 2px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+          }
+          .currency-toggle button {
+            padding: 4px 8px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.3);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+          }
+          .currency-toggle button.active {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+          }
         `}</style>
         
         {/* Main Content Grid */}

@@ -5,7 +5,7 @@ import { bricks } from '@/data/bricks';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Plus, Check, MessageSquare, Zap, Mic, Image, Layout, Box, Database, Search, Workflow, Cpu, Code, AlertCircle, Clock, Globe, Shield, Activity, BarChart, Info, TrendingUp } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
-import { calculateEfficiencyScore, formatCurrency } from '@/lib/calculator';
+import { calculateEfficiencyScore, formatCurrency, getCurrencyByLocale } from '@/lib/calculator';
 import Link from 'next/link';
 
 const IconMap: Record<string, any> = {
@@ -13,7 +13,7 @@ const IconMap: Record<string, any> = {
 };
 
 export default function BrickGrid() {
-  const { selectedBrickIds, toggleBrick, activeCategory, searchQuery } = useStackStore();
+  const { selectedBrickIds, toggleBrick, activeCategory, searchQuery, currency } = useStackStore();
   const tBricks = useTranslations('Bricks');
   const tCats = useTranslations('Categories');
   const tIndex = useTranslations('Index');
@@ -211,10 +211,10 @@ export default function BrickGrid() {
                   color: '#fff',
                   opacity: 0.9
                 }}>
-                  {brick.pricing.type === 'token' ? `${formatCurrency(brick.pricing.inputPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/1M` : 
-                   brick.pricing.type === 'subscription' ? `${formatCurrency(brick.pricing.monthlyPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/mo` : 
-                   brick.pricing.type === 'infra' ? `${formatCurrency(brick.pricing.unitPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/${brick.pricing.unitName}` : 
-                   brick.pricing.type === 'request' ? `${formatCurrency(brick.pricing.unitPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/req` : 'Free Tier'}
+                  {brick.pricing.type === 'token' ? `${formatCurrency(brick.pricing.inputPrice || 0, currency)}/1M` : 
+                   brick.pricing.type === 'subscription' ? `${formatCurrency(brick.pricing.monthlyPrice || 0, currency)}/mo` : 
+                   brick.pricing.type === 'infra' ? `${formatCurrency(brick.pricing.unitPrice || 0, currency)}/${brick.pricing.unitName}` : 
+                   brick.pricing.type === 'request' ? `${formatCurrency(brick.pricing.unitPrice || 0, currency)}/req` : 'Free Tier'}
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
