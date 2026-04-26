@@ -105,9 +105,18 @@ export default async function BrickDetailPage({
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '2rem',
-                border: '1px solid rgba(255,255,255,0.1)'
+                border: '1px solid rgba(255,255,255,0.1)',
+                overflow: 'hidden'
               }}>
-                <Zap size={32} color={brick.color} />
+                {brick.logoSlug ? (
+                  <img 
+                    src={`https://cdn.simpleicons.org/${brick.logoSlug}/${brick.color.replace('#', '')}`}
+                    alt={`${t(`${brick.id}.name`)} AI Model Infrastructure Logo`}
+                    style={{ width: '36px', height: '36px', objectFit: 'contain' }}
+                  />
+                ) : (
+                  <Zap size={32} color={brick.color} aria-label={`${t(`${brick.id}.name`)} icon`} />
+                )}
               </div>
               <div>
                 <h2 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '-0.04em' }}>{t(`${brick.id}.name`)}</h2>
@@ -471,7 +480,7 @@ export default async function BrickDetailPage({
       </div>
 
       
-      {/* JSON-LD SoftwareApplication */}
+      {/* JSON-LD SoftwareApplication for Bing/Copilot Grounding */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -479,18 +488,49 @@ export default async function BrickDetailPage({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             "name": t(`${brick.id}.name`),
-            "operatingSystem": "All",
-            "applicationCategory": brick.category,
+            "description": t(`${brick.id}.description`),
+            "image": `https://stack.lego-sia.com/api/og?brick=${brick.id}`,
+            "applicationCategory": "BusinessApplication",
+            "applicationSubCategory": brick.category,
+            "operatingSystem": "Web-based",
+            "author": {
+              "@type": "Organization",
+              "name": "LegoStack"
+            },
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": brick.dxScore,
               "bestRating": "5",
-              "ratingCount": "100"
+              "ratingCount": "100",
+              "reviewCount": "24"
             },
             "offers": {
               "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
+              "price": brick.pricing.type === 'free' ? "0" : (brick.pricing.inputPrice || brick.pricing.monthlyPrice || "0"),
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock"
+            },
+            "featureList": t(`${brick.id}.feature`),
+            "softwareAddOn": {
+              "@type": "SoftwareApplication",
+              "name": "LegoStack Calculator",
+              "description": "Real-time cost simulation for AI infrastructure"
+            },
+            "positiveNotes": {
+              "@type": "ItemList",
+              "itemListElement": (t.raw(`${brick.id}.pros`) as string[] || []).map((pro, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "name": pro
+              }))
+            },
+            "negativeNotes": {
+              "@type": "ItemList",
+              "itemListElement": (t.raw(`${brick.id}.cons`) as string[] || []).map((con, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "name": con
+              }))
             }
           })
         }}

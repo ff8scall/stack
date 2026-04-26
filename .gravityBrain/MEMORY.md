@@ -2,6 +2,10 @@
 
 ## 🎯 현재 상황 (Context)
 - **프로젝트**: LegoStack (AI FinOps Playground)
+- **IndexNow 검색 엔진 연동 고도화 (2026-04-26)**
+  - **멀티 엔드포인트**: Bing(IndexNow.org) 및 Naver 서치어드바이저 동시 연동 완료.
+  - **동일 키 재사용**: 단일 API Key(`083642cc731a4b27909fef930cda8a90`)로 여러 검색 엔진 통합 관리.
+  - **자동화 연동**: GitHub Actions를 통한 가격 업데이트 시 자동 색인 요청 트리거 구축.
 - **전방위 데이터 품질 감사 및 안정화 완료 (2026-04-26)**
   - **데이터 심화**: 22개 전체 브릭에 Context Window, Max Output, Regions 정보 보강.
   - **통화 엔진 완결**: 로케일별 자동 통화 전환 및 전역 상태(KRW/USD) 동기화 구현.
