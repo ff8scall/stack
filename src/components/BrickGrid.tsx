@@ -5,7 +5,7 @@ import { bricks } from '@/data/bricks';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Plus, Check, MessageSquare, Zap, Mic, Image, Layout, Box, Database, Search, Workflow, Cpu, Code, AlertCircle, Clock, Globe, Shield, Activity, BarChart, Info, TrendingUp } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
-import { calculateEfficiencyScore } from '@/lib/calculator';
+import { calculateEfficiencyScore, formatCurrency } from '@/lib/calculator';
 import Link from 'next/link';
 
 const IconMap: Record<string, any> = {
@@ -211,9 +211,10 @@ export default function BrickGrid() {
                   color: '#fff',
                   opacity: 0.9
                 }}>
-                  {brick.pricing.type === 'token' ? `$${brick.pricing.inputPrice}/1M` : 
-                   brick.pricing.type === 'subscription' ? `$${brick.pricing.monthlyPrice}/mo` : 
-                   brick.pricing.type === 'infra' ? `$${brick.pricing.unitPrice}/${brick.pricing.unitName}` : 'Free Tier'}
+                  {brick.pricing.type === 'token' ? `${formatCurrency(brick.pricing.inputPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/1M` : 
+                   brick.pricing.type === 'subscription' ? `${formatCurrency(brick.pricing.monthlyPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/mo` : 
+                   brick.pricing.type === 'infra' ? `${formatCurrency(brick.pricing.unitPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/${brick.pricing.unitName}` : 
+                   brick.pricing.type === 'request' ? `${formatCurrency(brick.pricing.unitPrice || 0, locale === 'ko' ? 'KRW' : 'USD')}/req` : 'Free Tier'}
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

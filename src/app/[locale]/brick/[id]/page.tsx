@@ -264,7 +264,7 @@ export default async function BrickDetailPage({
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#10b981' }}>{tDetail('pros')}</h4>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {(t.raw(`${brick.id}.pros`) as string[]).map((pro, i) => (
+                {Array.isArray(t.raw(`${brick.id}.pros`)) && (t.raw(`${brick.id}.pros`) as string[]).map((pro, i) => (
                   <li key={i} style={{ fontSize: '0.95rem', display: 'flex', gap: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>
                     <Zap size={16} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} /> {pro}
                   </li>
@@ -274,7 +274,7 @@ export default async function BrickDetailPage({
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#ef4444' }}>{tDetail('cons')}</h4>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {(t.raw(`${brick.id}.cons`) as string[]).map((con, i) => (
+                {Array.isArray(t.raw(`${brick.id}.cons`)) && (t.raw(`${brick.id}.cons`) as string[]).map((con, i) => (
                   <li key={i} style={{ fontSize: '0.95rem', display: 'flex', gap: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>
                     <Activity size={16} color="#ef4444" style={{ flexShrink: 0, marginTop: '2px' }} /> {con}
                   </li>
@@ -302,7 +302,7 @@ export default async function BrickDetailPage({
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <h4 style={{ fontSize: '0.9rem', fontWeight: '700', opacity: 0.5 }}>{tDetail('use_cases')}</h4>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                {(t.raw(`${brick.id}.useCases`) as string[]).map((useCase, i) => (
+                {Array.isArray(t.raw(`${brick.id}.useCases`)) && (t.raw(`${brick.id}.useCases`) as string[]).map((useCase, i) => (
                   <span key={i} style={{ 
                     padding: '4px 12px', 
                     borderRadius: '8px', 
