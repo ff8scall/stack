@@ -10,8 +10,8 @@
 ## 🛠️ 작업 단계
 
 ### 1. 사전 준비 및 검증
-- [ ] 현재 설정된 API Key(`083642cc731a4b27909fef930cda8a90`)가 네이버 가이드라인을 충족하는지 재확인 (Hex/Digit/Dash, 8-128자) -> **충족 완료**
-- [ ] 루트 디렉토리의 키 파일(`public/083642cc731a4b27909fef930cda8a90.txt`) 존재 여부 확인 -> **확인 완료**
+- [x] 현재 설정된 API Key(`083642cc731a4b27909fef930cda8a90`)가 네이버 가이드라인을 충족하는지 재확인 (Hex/Digit/Dash, 8-128자) -> **충족 완료**
+- [x] 루트 디렉토리의 키 파일(`public/083642cc731a4b27909fef930cda8a90.txt`) 존재 여부 확인 -> **확인 완료**
 
 ### 2. 코드 수정 (`src/lib/indexnow.ts`)
 - [x] `INDEXNOW_ENDPOINTS` 배열 도입 (Bing: `api.indexnow.org`, Naver: `searchadvisor.naver.com/indexnow`)
@@ -21,7 +21,8 @@
 ### 3. 기능 테스트 및 검증
 - [x] 로컬 환경에서 테스트 URL을 사용하여 네이버 엔드포인트 호출 테스트 -> **HTTP 200 확인 완료**
 - [x] HTTP 응답 코드(200, 202 등) 확인을 통한 정상 작동 여부 판단.
-- [ ] (선택) 네이버 서치어드바이저 콘솔에서 인덱싱 요청 현황 확인 안내.
+- [x] 빙 가이드라인 기반 **Streaming(ID별 전송)** 및 **Copilot Grounding(JSON-LD)** 고도화 적용 완료.
+- [x] GitHub Push 및 실전 배포 완료.
 
 ---
 

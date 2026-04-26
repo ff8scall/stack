@@ -23,7 +23,8 @@
     "capturing": "Capturing...",
     "tip_prefix": "💡 Tip:",
     "tip_message": "usage level assumed. Share this stack with your team to discuss cost optimization.",
-    "last_updated_label": "Last Updated"
+    "last_updated_label": "Last Updated",
+    "browse_categories": "Browse by Category"
   },
   "Categories": {
     "All": "All",

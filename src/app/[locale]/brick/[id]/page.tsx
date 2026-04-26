@@ -30,19 +30,22 @@ export async function generateMetadata({
 
   return {
     title: locale === 'ko' 
-      ? `${name} 비용 시뮬레이션 및 분석 | LegoStack`
-      : `${name} Cost Simulation & Analysis | LegoStack`,
-    description: `${name}: ${feature}. LegoStack에서 실시간 인프라 비용을 계산해보세요.`,
+      ? `[2026 최신] ${name} 비용 시뮬레이션 및 분석 | LegoStack`
+      : `[2026] ${name} Cost Simulation & Analysis | LegoStack`,
+    description: `${name}: ${feature}. LegoStack에서 실시간 인프라 비용을 계산하고 다른 AI 도구와 비교해보세요.`,
     alternates: {
-      canonical: `/${locale}/brick/${id}`,
+      canonical: `https://stack.lego-sia.com/${locale}/brick/${id}`,
     },
     openGraph: {
+      title: `${name} - AI FinOps Simulator`,
+      description: `${name}: ${feature}.`,
+      url: `/${locale}/brick/${id}`,
       images: [
         {
-          url: `/api/og?brick=${id}`, // 추후 brick 전용 OG API 구현 가능
+          url: `/api/og?brick=${id}`,
           width: 1200,
           height: 630,
-          alt: `${name} on LegoStack`,
+          alt: `${name} Analysis on LegoStack`,
         }
       ]
     }
@@ -62,6 +65,13 @@ export default async function BrickDetailPage({
   const tDetail = await getTranslations('BrickDetail');
   const tCats = await getTranslations('Categories');
 
+  // Breadcrumbs data
+  const breadcrumbs = [
+    { name: locale === 'ko' ? '홈' : 'Home', item: `https://stack.lego-sia.com/${locale}` },
+    { name: tCats(brick.category), item: `https://stack.lego-sia.com/${locale}/category/${brick.category}` },
+    { name: t(`${brick.id}.name`), item: `https://stack.lego-sia.com/${locale}/brick/${brick.id}` }
+  ];
+
   return (
     <main style={{ 
       display: 'flex', 
@@ -73,6 +83,18 @@ export default async function BrickDetailPage({
       <Navbar />
       
       <div style={{ width: '100%', maxWidth: '800px', marginTop: '4rem' }}>
+        {/* Breadcrumbs UI */}
+        <nav aria-label="Breadcrumb" style={{ marginBottom: '1.5rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', display: 'flex', gap: '0.5rem' }}>
+          {breadcrumbs.map((bc, i) => (
+            <div key={bc.item} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Link href={bc.item} style={{ color: i === breadcrumbs.length - 1 ? '#fff' : 'inherit', textDecoration: 'none' }} className="hover-white">
+                {bc.name}
+              </Link>
+              {i < breadcrumbs.length - 1 && <span>/</span>}
+            </div>
+          ))}
+        </nav>
+
         <Link href={`/${locale}`} style={{ 
           display: 'flex', 
           alignItems: 'center', 
@@ -112,6 +134,7 @@ export default async function BrickDetailPage({
                   <img 
                     src={`https://cdn.simpleicons.org/${brick.logoSlug}/${brick.color.replace('#', '')}`}
                     alt={`${t(`${brick.id}.name`)} AI Model Infrastructure Logo`}
+                    loading="lazy"
                     style={{ width: '36px', height: '36px', objectFit: 'contain' }}
                   />
                 ) : (
@@ -429,7 +452,7 @@ export default async function BrickDetailPage({
             background: 'linear-gradient(to bottom right, rgba(255,255,255,0.05), transparent)'
           }}>
             <h5 style={{ color: '#fff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Activity size={14} /> {tDetail('insight_title')}
+                    <Activity size={14} /> {tDetail('insight_title')}
             </h5>
             {tDetail('insight_desc', { 
               name: t(`${brick.id}.name`), 
@@ -479,64 +502,96 @@ export default async function BrickDetailPage({
         </div>
       </div>
 
-      
-      {/* JSON-LD SoftwareApplication for Bing/Copilot Grounding */}
+      {/* Advanced SEO Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": t(`${brick.id}.name`),
-            "description": t(`${brick.id}.description`),
-            "image": `https://stack.lego-sia.com/api/og?brick=${brick.id}`,
-            "applicationCategory": "BusinessApplication",
-            "applicationSubCategory": brick.category,
-            "operatingSystem": "Web-based",
-            "author": {
-              "@type": "Organization",
-              "name": "LegoStack"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": brick.dxScore,
-              "bestRating": "5",
-              "ratingCount": "100",
-              "reviewCount": "24"
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": brick.pricing.type === 'free' ? "0" : (brick.pricing.inputPrice || brick.pricing.monthlyPrice || "0"),
-              "priceCurrency": "USD",
-              "availability": "https://schema.org/InStock"
-            },
-            "featureList": t(`${brick.id}.feature`),
-            "softwareAddOn": {
+          __html: JSON.stringify([
+            // 1. SoftwareApplication (Enhanced)
+            {
+              "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "LegoStack Calculator",
-              "description": "Real-time cost simulation for AI infrastructure"
+              "name": t(`${brick.id}.name`),
+              "description": t(`${brick.id}.description`),
+              "image": `https://stack.lego-sia.com/api/og?brick=${brick.id}`,
+              "applicationCategory": "BusinessApplication",
+              "applicationSubCategory": brick.category,
+              "operatingSystem": "Web-based",
+              "author": { "@type": "Organization", "name": "LegoStack" },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": brick.dxScore,
+                "bestRating": "5",
+                "ratingCount": "100"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": brick.pricing.type === 'free' ? "0" : (brick.pricing.inputPrice || brick.pricing.monthlyPrice || "0"),
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
             },
-            "positiveNotes": {
-              "@type": "ItemList",
-              "itemListElement": (t.raw(`${brick.id}.pros`) as string[] || []).map((pro, index) => ({
+            // 2. BreadcrumbList
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": breadcrumbs.map((bc, i) => ({
                 "@type": "ListItem",
-                "position": index + 1,
-                "name": pro
+                "position": i + 1,
+                "name": bc.name,
+                "item": bc.item
               }))
             },
-            "negativeNotes": {
-              "@type": "ItemList",
-              "itemListElement": (t.raw(`${brick.id}.cons`) as string[] || []).map((con, index) => ({
-                "@type": "ListItem",
-                "position": index + 1,
-                "name": con
-              }))
+            // 3. FAQPage (Dynamic)
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": locale === 'ko' ? `${t(`${brick.id}.name`)}의 가격은 얼마인가요?` : `How much does ${t(`${brick.id}.name`)} cost?`,
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": locale === 'ko' 
+                      ? `${t(`${brick.id}.name`)}의 기본 가격 모델은 ${brick.pricing.type} 방식입니다. 상세 비용은 LegoStack 계산기를 통해 실시간으로 확인하실 수 있습니다.`
+                      : `The pricing model for ${t(`${brick.id}.name`)} is ${brick.pricing.type} based. You can simulate real-time costs using LegoStack calculator.`
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": locale === 'ko' ? `${t(`${brick.id}.name`)}의 주요 장점은 무엇인가요?` : `What are the pros of ${t(`${brick.id}.name`)}?`,
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": (t.raw(`${brick.id}.pros`) as string[] || []).join(', ')
+                  }
+                }
+              ]
+            },
+            // 4. Dataset (Real-time AI Pricing Data)
+            {
+              "@context": "https://schema.org",
+              "@type": "Dataset",
+              "name": `${t(`${brick.id}.name`)} API Pricing & Performance Data`,
+              "description": `Real-time pricing and infrastructure cost analysis for ${t(`${brick.id}.name`)}. Includes DX scores, efficiency ratings, and multi-region availability.`,
+              "url": `https://stack.lego-sia.com/${locale}/brick/${id}`,
+              "license": "https://stack.lego-sia.com/privacy",
+              "isAccessibleForFree": true,
+              "creator": {
+                "@type": "Organization",
+                "name": "LegoStack"
+              },
+              "distribution": [
+                {
+                  "@type": "DataDownload",
+                  "encodingFormat": "application/json",
+                  "contentUrl": `https://stack.lego-sia.com/api/indexnow?ids=${id}`
+                }
+              ],
+              "temporalCoverage": "2026-01-01/2026-12-31"
             }
-          })
+          ])
         }}
       />
     </main>
-
-
   );
 }

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block API routes and private scripts
+Disallow: /api/
+Disallow: /scripts/
+
+# Host and Sitemap
+Host: https://stack.lego-sia.com
+Sitemap: https://stack.lego-sia.com/sitemap.xml

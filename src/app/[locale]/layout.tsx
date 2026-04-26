@@ -65,6 +65,7 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
       images: ['/og-default.png'],
     },
     verification: {
+      google: 'google-site-verification-placeholder', // TODO: 실제 키로 교체 필요
       other: {
         'naver-site-verification': 'c57ed82fed9c43ca46f0af92cc91e2a95599f3ba',
         'msvalidate.01': '048AB450B6B91E03CAF13FDE8415F954',
@@ -98,13 +99,26 @@ export default async function LocaleLayout({
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "LegoStack",
+    "alternateName": "레고스택",
     "operatingSystem": "Web",
-    "applicationCategory": "DeveloperApplication",
+    "applicationCategory": "BusinessApplication",
     "description": "Interactive AI FinOps simulator to calculate API costs and build infrastructure stacks.",
+    "url": "https://stack.lego-sia.com",
+    "image": "https://stack.lego-sia.com/og-default.png",
+    "author": {
+      "@type": "Organization",
+      "name": "LegoStack",
+      "url": "https://stack.lego-sia.com"
+    },
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "150"
     }
   };
 

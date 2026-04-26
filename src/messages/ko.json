@@ -23,7 +23,8 @@
     "capturing": "캡처 중...",
     "tip_prefix": "💡 Tip:",
     "tip_message": "수준의 사용량을 가정했습니다. 공유 버튼을 통해 이 구성을 동료에게 전달하고 비용 최적화를 논의해보세요.",
-    "last_updated_label": "최종 업데이트"
+    "last_updated_label": "최종 업데이트",
+    "browse_categories": "카테고리별 탐색"
   },
   "Categories": {
     "All": "전체",

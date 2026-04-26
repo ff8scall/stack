@@ -96,10 +96,11 @@ export default function BrickGrid() {
                     boxShadow: `0 4px 12px ${brick.color}11`
                   }}>
                     {logoUrl ? (
-                      <img 
-                        src={logoUrl} 
-                        alt={brick.name} 
-                        style={{ width: '22px', height: '22px', objectFit: 'contain' }}
+                        <img 
+                          src={logoUrl} 
+                          alt={`${brick.name} AI model logo`} 
+                          loading="lazy"
+                          style={{ width: '22px', height: '22px', objectFit: 'contain' }}
                         onError={(e) => {
                           // 로고 로드 실패 시 아이콘으로 대체
                           (e.target as any).style.display = 'none';

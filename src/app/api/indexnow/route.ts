@@ -111,8 +111,8 @@ async function handleRequest(request: Request) {
     });
   }
 
-  // 중복 제거
-  finalUrls = Array.from(new Set(finalUrls));
+  // 중복 제거 및 개수 제한 (IndexNow 가이드라인 준수)
+  finalUrls = Array.from(new Set(finalUrls)).slice(0, 1000);
 
   const success = await notifyIndexNow(finalUrls);
 

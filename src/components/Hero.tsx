@@ -2,12 +2,14 @@
 
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { ArrowRight } from 'lucide-react';
 import { useStackStore } from '@/store/useStackStore';
+import Link from 'next/link';
 
 export default function Hero() {
   const t = useTranslations('Index');
+  const locale = useLocale();
   const [isMounted, setIsMounted] = useState(false);
   const { currency } = useStackStore();
 
@@ -147,6 +149,45 @@ export default function Hero() {
               {currency === 'KRW' ? t('hero_counter_suffix') : '/mo'}
             </span>
           </div>
+        </div>
+      </motion.div>
+
+      {/* Category Silo Links (Advanced SEO) */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        style={{
+          marginTop: '4rem',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1rem'
+        }}
+      >
+        <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          {t('browse_categories')}
+        </span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem' }}>
+          {['Language', 'Vision', 'Voice', 'Builder', 'Infra'].map((cat) => (
+            <Link
+              key={cat}
+              href={`/${locale}/category/${cat}`}
+              className="glass hover-scale"
+              style={{
+                padding: '0.5rem 1rem',
+                borderRadius: '12px',
+                fontSize: '0.85rem',
+                color: 'rgba(255,255,255,0.6)',
+                textDecoration: 'none',
+                border: '1px solid rgba(255,255,255,0.05)',
+                background: 'rgba(255,255,255,0.02)',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {cat}
+            </Link>
+          ))}
         </div>
       </motion.div>
     </section>
