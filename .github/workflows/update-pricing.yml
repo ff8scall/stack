@@ -34,3 +34,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add src/data/bricks.ts
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update pricing data [skip ci]" && git push)
+
+      - name: Notify IndexNow
+        run: |
+          curl -X GET "https://stack.lego-sia.com/api/indexnow?secret=083642cc731a4b27909fef930cda8a90"
