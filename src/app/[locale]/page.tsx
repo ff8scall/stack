@@ -6,7 +6,7 @@ import PresetSelector from '@/components/PresetSelector';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
 
-export const revalidate = 3600; // 1시간마다 데이터 갱신 (ISR)
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

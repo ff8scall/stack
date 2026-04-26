@@ -7,6 +7,8 @@ import { Star, Clock, Globe, ArrowLeft, ExternalLink, Shield, Zap, Activity, Arr
 import { calculateMonthlyCost, formatCurrency, calculateEfficiencyScore } from '@/lib/calculator';
 import Link from 'next/link';
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return bricks.map((brick) => ({
     id: brick.id,
