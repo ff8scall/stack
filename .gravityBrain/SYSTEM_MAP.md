@@ -81,5 +81,8 @@ graph TD
    - 단순 가격 비교를 넘어 MMLU 등 공인 벤치마크 데이터를 비용과 결합하여 '가장 가성비 좋은 도구'를 산출합니다.
 10. **검색 엔진 실시간 동기화 (IndexNow 고도화)**:
    - **멀티 엔드포인트**: `src/lib/indexnow.ts`를 통해 Bing과 Naver 서치어드바이저에 URL 갱신 정보를 동시 통보합니다.
-   - **스트리밍(Streaming) 모드**: `api/indexnow`는 전체 배치 외에 특정 ID별 업데이트를 지원하여 변경 즉시 검색 엔진에 반영되도록 합니다.
-   - **AI Grounding 최적화**: 상세 페이지에 고도화된 JSON-LD를 적용하여 Bing Copilot 및 AI 검색 엔진이 데이터를 정확히 인용하도록 지원합니다.
+   - **스트리밍(Streaming) 모드**: `api/indexnow`는 특정 ID별 업데이트를 지원하며, 전송 URL 개수 제한(1,000개)을 통해 안정성을 확보합니다.
+11. **Advanced SEO & AI 최적화**:
+   - **구글 가이드라인 준수**: `robots.txt` 구축, 이미지 지연 로딩, 전역 메타데이터 최적화로 구글 검색 가시성을 극대화합니다.
+   - **구조화 데이터(JSON-LD) 패키지**: `SoftwareApplication`, `BreadcrumbList`, `FAQPage`, `Dataset` 등 4종 이상의 스키마를 결합하여 검색 결과 점유율을 높입니다.
+   - **Silo 구조 강화**: 메인 페이지 카테고리 링크 및 상세 페이지 연관 도구 링크를 통해 강력한 내부 링크 체계를 구축했습니다.
