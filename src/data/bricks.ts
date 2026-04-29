@@ -96,7 +96,7 @@ export const bricks: Brick[] = [
     dxScore: 4.2,
     performance: { intelligence: 94, speed: 80, accuracy: 92, benchmarkScore: 90.1, benchmarkName: "MMLU-Pro", contextWindow: 2000, maxOutput: 8 },
     killerFeature: "방대한 무료 티어와 구글 생태계 통합",
-    lastUpdated: "2026-04-28",
+    lastUpdated: "2026-04-29",
     url: "https://aistudio.google.com",
     color: "#4285f4",
     iconName: "Zap",
